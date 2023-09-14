@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{HomeController};
+use App\Http\Controllers\{HomeController , PasscodeController};
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +14,21 @@ use App\Http\Controllers\{HomeController};
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('home', [HomeController::class , 'home'])->name('home');
-Route::get('gurantee', [HomeController::class , 'gurantee'])->name('gurantee');
-Route::get('condition-of-use', [HomeController::class , 'condition'])->name('useCondition');
-Route::get('contact', [HomeController::class , 'contact'])->name('contact');
-Route::get('privacy-policy', [HomeController::class , 'policy'])->name('policy');
-Route::get('sell-card', [HomeController::class , 'card'])->name('card');
-Route::get('forget-password', [HomeController::class , 'forgetPassword'])->name('forgetPassword');
+Route::get('/', [HomeController::class , 'commingSoon']);
+Route::get('comming-soon', [HomeController::class , 'commingSoon'])->name('commingSoon');
+Route::post('set-passcode' , [PasscodeController::class , 'setPasscode'])->name('set.passcode');
 Route::get('login', [HomeController::class , 'login'])->name('login');
 Route::get('register', [HomeController::class , 'register'])->name('register');
-Route::get('comming-soon', [HomeController::class , 'commingSoon'])->name('commingSoon');
 
+
+Route::group(['middleware' => ['check.passcode']] , function(){
+
+    Route::get('home', [HomeController::class , 'home'])->name('home');
+    Route::get('gurantee', [HomeController::class , 'gurantee'])->name('gurantee');
+    Route::get('condition-of-use', [HomeController::class , 'condition'])->name('useCondition');
+    Route::get('contact', [HomeController::class , 'contact'])->name('contact');
+    Route::get('privacy-policy', [HomeController::class , 'policy'])->name('policy');
+    Route::get('sell-card', [HomeController::class , 'card'])->name('card');
+    Route::get('forget-password', [HomeController::class , 'forgetPassword'])->name('forgetPassword');
+
+});

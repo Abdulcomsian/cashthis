@@ -22,7 +22,7 @@
     @include('components.footer')
 
 
-    @yeild('page-script')
+    @yield('page-script')
     
 
 </body>

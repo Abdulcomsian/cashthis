@@ -9,21 +9,21 @@
                     <img class="ms-3 footer-img" src="./assets/images/arrow.png" alt="">
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="heading-6">About</div>
-                <div class="text-3 mt-3">Our Story</div>
-                <div class="text-3 mt-3">How It Works</div>
+            <div class="col-md-2" style="display: flex; flex-direction: column">
+                <a class="heading-6">About</a>
+                <a class="text-3 mt-3">Our Story</a>
+                <a href="{{route('useCondition')}}" class="text-3 mt-3">How It Works</a>
             </div>
-            <div class="col-md-2">
-                <div class="heading-6">Support</div>
-                <div class="text-3 mt-3">FAQ</div>
-                <div class="text-3 mt-3"> <a href="./Gurantee.html"> Guarantee</a> </div>
-                <div class="text-3 mt-3"> <a href="./contact.html"> Contact US </a></div>
+            <div class="col-md-2" style="display: flex; flex-direction: column">
+                <a class="heading-6">Support</a>
+                <a class="text-3 mt-3">FAQ</a>
+                <a href="{{route('gurantee')}}" class="text-3 mt-3">Guarantee </a>
+                <a href="{{route('contact')}}" class="text-3 mt-3">Contact US</a>
             </div>
-            <div class="col-md-2">
-                <div class="heading-6">Account</div>
-                <div class="text-3 mt-3">Login</div>
-                <div class="text-3 mt-3">Refer a Friend</div>
+            <div class="col-md-2" style="display: flex; flex-direction: column">
+                <a class="heading-6">Account</a>
+                <a class="text-3 mt-3">Login</a>
+                <a class="text-3 mt-3">Refer a Friend</a>
             </div>
         </div>
 
@@ -38,11 +38,12 @@
                 <img src="./assets/images/linkedin.png" alt="">
             </div>
             <div class="col-md-3 d-flex gap-4 justify-content-md-end">
-                <div class="text-3 "><a href="./condition-of-use.html"> Terms of Services </a> </div>
-                <div class="text-3 "> <a href="./privacy-policy.html"> Privacy Policy</a></div>
+                <div class="text-3 "><a href="{{route('useCondition')}}"> Terms of Services </a> </div>
+                <div class="text-3 "> <a href="{{route('policy')}}"> Privacy Policy</a></div>
             </div>
         </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

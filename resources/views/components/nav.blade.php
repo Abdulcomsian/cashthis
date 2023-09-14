@@ -10,16 +10,16 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item m-lg-auto">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="{{route('home')}}">Home</a>
                 </li>
                 <li class="nav-item m-lg-auto">
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item m-lg-auto">
-                    <a class="nav-link " href="#">How It Works</a>
+                    <a class="nav-link " href="{{route('useCondition')}}">How It Works</a>
                 </li>
             </ul>
-            <button class="btn-1">Sign in</button>
+            <a href="{{route('login')}}" class="btn-1">Sign in</a>
             <img class="nav-img  " src="./assets/images/Vector.png" alt="Image">
         </div>
     </div>
