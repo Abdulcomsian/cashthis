@@ -1,0 +1,230 @@
+
+
+.login-main {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.login-main > .left-login-side {
+  /* background-color: #5570f169; */
+  width: 55%;
+  /* display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh; */
+}
+
+.login-main > .left-login-side > div > img {
+  height: 100vh;
+  width: 100%;
+}
+
+.login-main > .right-login-side {
+  width: 45%;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+.login-main > .right-login-side > .logo-section {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.login-main > .right-login-side > .form-section {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.login-main > .right-login-side > .form-section > div {
+  width: 100%;
+}
+
+.login-main
+  > .right-login-side
+  > .form-section
+  > div
+  > .text-container
+  > .text-line-1
+  > span {
+  font-family: "Lato";
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 4rem;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #282938;
+
+}
+
+.login-main
+  > .right-login-side
+  > .form-section
+  > div
+  > .text-container
+  > .text-line-1
+  > span
+  > span {
+  color: #5570f1;
+}
+
+.login-main
+  > .right-login-side
+  > .form-section
+  > div
+  > .text-container
+  > .text-line-2 {
+  margin-top: 1rem;
+}
+
+.login-main
+  > .right-login-side
+  > .form-section
+  > div
+  > .text-container
+  > .text-line-2
+  > span {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 26px;
+
+}
+.login-main
+  > .right-login-side
+  > .form-section
+  > div
+  > .form-container
+  > .text-line-2
+  > span {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 26px;
+
+}
+
+.login-main
+  > .right-login-side
+  > .form-section
+  > div
+  > .text-container
+  > .text-line-2
+  > span
+  > a {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+  color: #5570f1;
+}
+
+.login-main > .right-login-side > .form-section > div > .form-container > form {
+  margin-top: 2rem;
+}
+
+.login-main
+  > .right-login-side
+  > .form-section
+  > div
+  > .form-container
+  > form
+  > div
+  > label {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0.2rem;
+}
+
+.login-main
+  > .right-login-side
+  > .form-section
+  > div
+  > .form-container
+  > form
+  > div
+  > input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.login-main
+  > .right-login-side
+  > .form-section
+  > div
+  > .form-container
+  > form
+  > div
+  > button {
+  background: #5570f1;
+  border-radius: 6px;
+  border: none;
+  color: #ffff;
+  width: 100%;
+  height: 3rem;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+
+#mail , #no{
+  font-family: "Lato";
+  font-weight: 400;
+  font-size: 16px;
+}
+/* #email::placeholder{
+  font-family: "Segoe UI";
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0em;
+text-align: left;
+color: #444150;
+} */
+.show{
+  color: #5570f1;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+  text-decoration-thickness: 0.1rem;
+ 
+}
+#phone-input {
+  width: 100% !important;
+
+}
+
+@media screen and (max-width: 768px) {
+  .login-main > .left-login-side {
+    width: 45%;
+  }
+  .login-main > .right-login-side {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .login-main > .left-login-side {
+    display: none;
+  }
+  .login-main > .right-login-side {
+    width: 100%;
+  }
+}

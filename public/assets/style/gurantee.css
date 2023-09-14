@@ -1,0 +1,255 @@
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../font/Proxima\ Nova\ Font.otf') format('opentype');
+  }
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbar-brand>img {
+    width: 210.29px;
+    height: 46.25px;
+  }
+  
+  .btn-1 {
+    background-color: #FFBC51;
+    color: white;
+    padding: 12px 37px;
+    border-radius: 96px;
+    border: none;
+    font-family: "Proxima Nova";
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+  }
+  
+  .nav-img {
+    width: 26.000442504882812px;
+    height: 26.001943588256836px;
+    margin-left: 2%;
+  }
+  
+  .nav-link {
+    /* font-family: 'Lato', sans-serif; */
+    font-family: "Lato";
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+  
+  }
+  
+  .navbar .nav-item {
+    margin-right: 30px !important;
+  }
+  
+  @media screen and (max-width:989px) {
+    .nav-img {
+      display: block;
+      margin: auto;
+      margin-top: 15px;
+    }
+  
+    .btn-1 {
+      display: flex;
+      justify-content: center;
+      margin: auto;
+    }
+  }
+  
+  
+
+
+
+/* section-2  */
+.heading {
+    font-family: "Lato";
+    font-weight: 700;
+    font-size: 28px;
+    margin-top: 110px;
+    text-align: justify;
+  }
+  
+  .heading-2 {
+    font-family: "Lato";
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 16px;
+    text-align: justify;
+  }
+  
+  .para {
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 16px;
+    margin-top: 16px;
+    text-align: justify;
+  }
+  .font-weight-bold{
+    font-weight: bold;
+  }
+
+  
+.list-para {
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 16px;
+    text-align: justify;
+  }
+  
+  @media screen and (max-width:767px) {
+    .heading {
+      font-size: 22px;
+      margin-top: 80px;
+    }
+    
+    .heading-2 {
+      font-size: 16px;
+      margin-top: 16px;
+    }
+    .para {
+      font-size: 14px;
+      margin-top: 16px;
+    }
+    .list-para {
+      font-size: 14px;
+    }
+  }
+  
+  @media screen and (max-width:500px) {
+    .heading {
+      font-size: 19px;
+      margin-top: 80px;
+    }
+    
+    .heading-2 {
+      font-size: 14px;
+      margin-top: 16px;
+    }
+    .para {
+      font-size: 13px;
+      margin-top: 16px;
+    }
+    .list-para {
+      font-size: 13px;
+    }
+  }
+  
+
+
+
+
+
+
+
+
+/* footer */
+.section-7{
+    /* height: 466px; */
+    background: linear-gradient(to bottom,rgba(85, 112, 241, 0),rgba(85, 112, 241, 0.3));
+  }
+  .heading-6{
+    font-family: "Lato";
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29px;
+  letter-spacing: 0px;
+  text-align: left;
+  color:#39454A;
+  }
+  .text-3{
+    font-family: "Lato";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: left;
+  color: #616161;
+  }
+  .text-3 a{
+    text-decoration: none !important;
+    font-family: "Lato";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: left;
+    color: #616161;
+    cursor: pointer;
+  }
+  .text-5{
+    font-family: "Lato";
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+  color: #282938;
+  margin-top: 10px;
+  }
+  input{
+    height: 57px;
+  padding: 19px 28px ;
+  border: 0.5px;
+  gap: 10px;
+  border: 1px solid #999999 ;
+  background-color: white;
+  width:70%;
+  /* height:10%; */
+  }
+  .footer-text{
+    font-family: "Lato";
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 19px;
+  color:  #333333;
+  }
+  .footer-img{
+    cursor: pointer;
+  }
+  @media screen and (max-width:767px) {
+    .heading-6{
+      margin-top: 20px;
+      font-size: 15px;
+    }
+    input{
+      height: 40px;
+    padding: 10px 28px ;
+    }
+    .text-5{
+      font-size: 15px;
+    }
+    .text-3{
+      font-size: 13px;
+    }
+    .footer-text{
+      margin-top: 10px;
+    }
+    .footer-img{
+  width: 10%;
+    }
+  }
+  @media screen and (max-width:560px) {
+    .heading-6{
+      margin-top: 8px;
+      font-size: 15px;
+    }
+    input{
+        height: 27px;
+        padding: 9px 9px;
+    }
+    .text-5{
+      font-size: 12px;
+    }
+    .text-3{
+      font-size: 10px;
+    }
+    .footer-text{
+      margin-top: 10px;
+    }
+    .footer-img{
+  width: 5%;
+    }
+    .footer-logo{
+        width: 30%
+    }
+  }
