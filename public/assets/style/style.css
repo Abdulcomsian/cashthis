@@ -675,7 +675,8 @@ width: 5%;
       }
 
 
-      button.logout-btn {
+      button.logout-btn,
+      a.logout-btn {
         border: none;
         color: #5570F1;
         font-weight: bolder;

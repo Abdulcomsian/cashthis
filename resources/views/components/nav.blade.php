@@ -4,6 +4,12 @@
     </form>
 </div>
 
+<style>
+     .dropdown-toggle::after {
+    display: none;
+  }
+    </style>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">
@@ -30,9 +36,28 @@
                     <img class="nav-img  " src="{{asset('assets/images/Vector.png')}}" alt="Image">
                 </li>
                 @endif
-                <li>
+                <!-- <li>
                     <button class="logout-btn">Logout</button>
-                </li>
+                </li> -->
+                <div class="dropdown">
+
+                <div class="d-flex align-items-center  dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <!-- Avatar -->
+      <div class="dropdown p-1 " style="border:1px solid black; border-radius:22px">
+      <img
+            src="{{asset('assets/images/profile.svg')}}"
+            class="rounded-circle"
+            height="35"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+      </div>
+    </div>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <!-- <a class="dropdown-item logout-btn" href="#" role="button">Dashboard</a> -->
+    <a class="dropdown-item logout-btn" href="#" role="button">Logout</a>
+  </div>
+</div>
             </ul>
             
             
