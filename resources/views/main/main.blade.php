@@ -25,6 +25,15 @@
     @yield('page-script')
     
 
+
+    <script>
+
+        document.querySelector(".logout-btn").addEventListener("click" , function(){
+            document.getElementById('logout-form').submit(); 
+        })
+
+    </script>
+
 </body>
 
 </html>

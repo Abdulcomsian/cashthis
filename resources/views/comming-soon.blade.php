@@ -42,6 +42,7 @@
                 font-weight: 900;
                 background: none;
                 rotate: 15deg;
+                height: 32px;
             }
 
             .passcode-area button:hover{

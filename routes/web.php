@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{HomeController , PasscodeController};
+use App\Http\Controllers\{GiftcardController, HomeController , PasscodeController};
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +14,14 @@ use App\Http\Controllers\{HomeController , PasscodeController};
 |
 */
 
+Auth::routes();
+
+
 Route::get('/', [HomeController::class , 'commingSoon']);
 Route::get('comming-soon', [HomeController::class , 'commingSoon'])->name('commingSoon');
 Route::post('set-passcode' , [PasscodeController::class , 'setPasscode'])->name('set.passcode');
 Route::get('login', [HomeController::class , 'login'])->name('login');
-Route::get('register', [HomeController::class , 'register'])->name('register');
+Route::get('signup', [HomeController::class , 'register'])->name('register');
 
 
 Route::group(['middleware' => ['check.passcode']] , function(){
@@ -31,4 +34,10 @@ Route::group(['middleware' => ['check.passcode']] , function(){
     Route::get('sell-card', [HomeController::class , 'card'])->name('card');
     Route::get('forget-password', [HomeController::class , 'forgetPassword'])->name('forgetPassword');
 
+    
 });
+Route::get('view-token' , [GiftcardController::class ,'viewTokenDetail']);
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

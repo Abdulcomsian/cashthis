@@ -1,3 +1,9 @@
+<div class="d-none">
+    <form method="post" action="{{route('logout')}}" id="logout-form">
+    @csrf
+    </form>
+</div>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">
@@ -18,9 +24,22 @@
                 <li class="nav-item m-lg-auto">
                     <a class="nav-link " href="{{route('useCondition')}}">How It Works</a>
                 </li>
+                @if(!auth()->user())
+                <li>
+                    <a href="{{route('login')}}" class="btn-1">Sign in</a>
+                    <img class="nav-img  " src="{{asset('assets/images/Vector.png')}}" alt="Image">
+                </li>
+                @endif
+                <li>
+                    <button class="logout-btn">Logout</button>
+                </li>
             </ul>
-            <a href="{{route('login')}}" class="btn-1">Sign in</a>
-            <img class="nav-img  " src="./assets/images/Vector.png" alt="Image">
+            
+            
+            
+
+
+
         </div>
     </div>
 </nav>
