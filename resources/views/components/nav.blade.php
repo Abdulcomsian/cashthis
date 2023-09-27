@@ -40,24 +40,19 @@
                     <button class="logout-btn">Logout</button>
                 </li> -->
                 <div class="dropdown">
-
-                <div class="d-flex align-items-center  dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <!-- Avatar -->
-      <div class="dropdown p-1 " style="border:1px solid black; border-radius:22px">
-      <img
-            src="{{asset('assets/images/profile.svg')}}"
-            class="rounded-circle"
-            height="35"
-            alt="Black and White Portrait of a Man"
-            loading="lazy"
-          />
-      </div>
-    </div>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  <!-- <a class="dropdown-item logout-btn" href="#" role="button">Dashboard</a> -->
-    <a class="dropdown-item logout-btn" href="#" role="button">Logout</a>
-  </div>
-</div>
+                     <div class="d-flex align-items-center  dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- Avatar -->
+                        <div class="dropdown p-1 " style="border:1px solid black; border-radius:22px">
+                            <img src="{{asset('assets/images/profile.svg')}}" class="rounded-circle" height="35" alt="Black and White Portrait of a Man" loading="lazy" />
+                        </div>
+                     </div>
+                        @if(auth()->user())
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{url('user-dashboard')}}" role="button">Dashboard</a> 
+                                <button class="dropdown-item logout-btn">Logout</button>
+                            </div>
+                        @endif
+                </div>
             </ul>
             
             
