@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{GiftcardController, HomeController , PasscodeController};
+use App\Http\Controllers\{GiftcardController, HomeController , PasscodeController, UserDashboardController};
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +38,5 @@ Route::group(['middleware' => ['check.passcode']] , function(){
 });
 Route::get('view-token' , [GiftcardController::class ,'viewTokenDetail']);
 
-
-
+Route::get('user-dashboard' , [UserDashboardController::class , 'getDashboard']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
