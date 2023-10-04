@@ -97,7 +97,7 @@
           <div class="logo-section">
             <div>
               <a href="./index.html"
-                ><img src="./assets/images/Frame 126.png" alt="logo"
+                ><img src="{{asset('assets/images/Frame126.png')}}" alt="logo"
               /></a>
             </div>
           </div>

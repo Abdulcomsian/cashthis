@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{GiftcardController, HomeController , PasscodeController, UserDashboardController};
+use App\Http\Controllers\{GiftcardController, HomeController , PasscodeController, UserDashboardController , BillingController};
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +36,16 @@ Route::group(['middleware' => ['check.passcode']] , function(){
 
     
 });
-Route::get('view-token' , [GiftcardController::class ,'viewTokenDetail']);
 
 Route::get('user-dashboard' , [UserDashboardController::class , 'getDashboard']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/user-card', [GiftcardController::class, 'giftCardPage'])->name('giftCardPage');
+Route::post('get-gift-card', [GiftcardController::class, 'getGiftCards'])->name('getGiftCard');
+
+
+Route::group(['middleware' => ['auth']] , function(){
+    Route::get('gift-card-detail/{productId}' , [GiftCardController::class , 'giftCardDetail'])->name('giftCardDetail');
+    Route::post('purchase-card' , [BillingController::class , 'purchaseCard'])->name('purchaseGiftCard');
+    Route::get('success-purchase' , [BillingController::class , 'getSuccessPurchase'])->name('successPurchase');
+});
+

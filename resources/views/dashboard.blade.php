@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Condition Of Use
+    Dashboard
 @endsection
 
 @section('css-link')

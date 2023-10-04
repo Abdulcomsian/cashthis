@@ -13,7 +13,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="./assets/images/Frame 126.png" alt="Logo" width="40" height="40">
+            <img src="{{asset('assets/images/Frame126.png')}}" alt="Logo" width="40" height="40">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,11 +54,6 @@
                         @endif
                 </div>
             </ul>
-            
-            
-            
-
-
 
         </div>
     </div>
