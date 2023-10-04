@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\AppConst;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Http\Traits\ReloadyApi;
-use App\Models\Country;
+use App\Models\{ Country , User};
+use Yajra\DataTables\Facades\DataTables;
 class GiftcardController extends Controller
 {
     use ReloadyApi;
@@ -71,6 +73,7 @@ class GiftcardController extends Controller
             $giftCardDetail = json_decode($response->getBody()->getContents());
 
             $countries = Country::orderBy('country_name' , 'asc')->get();
+
             
             // dd($giftCardDetail);
             return view('gift-card-detail')->with(['cardDetail' => $giftCardDetail , 'countries' => $countries]);
@@ -79,6 +82,47 @@ class GiftcardController extends Controller
         }catch(\Exception $e){
             return response()->json(['status' => false , 'error' => $e->getMessage() , 'msg' => 'Something Went Wrong' ]);
         }
+    }
+
+
+    public function getOrdersPage(){
+        return view('orders');
+    }
+
+    public function getOrdersList(){
+
+        $user = User::with('orders')->where('id' , auth()->user()->id)->first();
+        $orders = $user->orders;
+
+        return DataTables::of($orders)
+                        ->addIndexColumn()
+                        ->addColumn('orderId' , function($order){
+                            return $order->id;
+                        })
+                        ->addColumn('card' , function($order){
+                            return $order->product_title;
+                        })
+                        ->addColumn('recipientEmail' , function($order){
+                            return $order->recipient_email;
+                        })
+                        ->addColumn('recipientPhone' , function($order){
+                            return $order->recipient_phone;
+                        })
+                        ->addColumn('quantity' , function($order){
+                            return $order->quantity;
+                        })
+                        ->addColumn('unitPrice' , function($order){
+                            return $order->unit_price;
+                        })
+                        ->addColumn('purchaseDate' , function($order){
+                            return $order->created_at;
+                        })
+                        ->addColumn('status' , function($order){
+                            return $order->status == AppConst::COMPLETED ? 'COMPLETED' : 'PENDING';
+                        })
+
+                        ->rawColumns(['orderId' , 'card' , 'recipientEmail' , 'recipientPhone' ,'quantity' , 'unitPrice' , 'purchaseDate'])
+                        ->make(true);
     }
 
 

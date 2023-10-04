@@ -68,7 +68,7 @@
                   @endforeach
                 </select>
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary filter-card" type="button">Button</button>
+                  <button class="btn btn-outline-secondary filter-card" type="button">Submit</button>
                 </div>
                 <img class="loading mx-2 d-none" src="{{asset('assets/images/loading.gif')}}" alt="">
             </div>

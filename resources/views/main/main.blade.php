@@ -28,12 +28,19 @@
 
 
     <script>
-        window.onload = function(){
-
-            document.querySelector(".logout-btn").addEventListener("click" , function(){
-                document.getElementById('logout-form').submit(); 
+        $(document).ready(function(){
+            $(document).on("click" , ".logout-btn" , function(){
+                document.getElementById('logout-form').submit();
             })
-        }
+        })
+
+
+        // window.onload = function(){
+
+        //     document.querySelector(".logout-btn").addEventListener("click" , function(){
+        //         document.getElementById('logout-form').submit(); 
+        //     })
+        // }
 
     </script>
     @yield('page-script')

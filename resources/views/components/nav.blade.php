@@ -30,8 +30,11 @@
                 <li class="nav-item m-lg-auto">
                     <a class="nav-link " href="{{route('useCondition')}}">How It Works</a>
                 </li>
+                <li class="nav-item m-lg-auto">
+                    <a class="nav-link " href="{{route('giftCardPage')}}">Gift Cards</a>
+                </li>
                 @if(!auth()->user())
-                <li>
+                <li class="nav-item m-lg-auto d-flex">
                     <a href="{{route('login')}}" class="btn-1">Sign in</a>
                     <img class="nav-img  " src="{{asset('assets/images/Vector.png')}}" alt="Image">
                 </li>
@@ -39,6 +42,7 @@
                 <!-- <li>
                     <button class="logout-btn">Logout</button>
                 </li> -->
+                @if(auth()->check())
                 <div class="dropdown">
                      <div class="d-flex align-items-center  dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <!-- Avatar -->
@@ -48,11 +52,13 @@
                      </div>
                         @if(auth()->user())
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{url('user-dashboard')}}" role="button">Dashboard</a> 
+                                <a class="dropdown-item" href="{{route('userDashboard')}}" role="button">Dashboard</a> 
+                                <a class="dropdown-item" href="{{route('orders')}}" role="button">Orders</a> 
                                 <button class="dropdown-item logout-btn">Logout</button>
                             </div>
                         @endif
                 </div>
+                @endif
             </ul>
 
         </div>

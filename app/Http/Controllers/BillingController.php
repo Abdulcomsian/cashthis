@@ -33,7 +33,8 @@ class BillingController extends Controller
                 "product_amount" => "required|numeric",
                 "email" => "required|email",
                 "country_code" => "required|string",
-                "payment_method" => "required|string"
+                "payment_method" => "required|string",
+                "product_name" => "required|string"
             ]);
 
             $stripe = new StripeClient(env('STRIPE_SECRET'));
@@ -50,9 +51,10 @@ class BillingController extends Controller
                 ],
             ]);
 
-            if($stripe->status === "succeeded"){
-                $client = new Client();
+        
 
+            if($stripe->status === "succeeded"){
+            $client = new Client();
             $url = 'https://giftcards-sandbox.reloadly.com/orders';
             
             $headers = [
@@ -85,31 +87,22 @@ class BillingController extends Controller
 
           $data = json_decode($response->getBody()->getContents());
 
-          if($data->status == "SUCCESSFUL"){
+        
             Billing::create([
                 "product_id" => $request->product_id, 
-                "status" => AppConst::COMMPLETED, 
+                "status" => $data->status == "SUCCESSFUL" ? AppConst::COMPLETED : AppConst::PENDING, 
                 "recipient_email" => $request->email, 
                 "recipient_phone" => $request->phone , 
                 "recipient_country_code" => $request->country_code, 
                 "quantity" => $request->quantity , 
                 "unit_price" => $request->product_amount,
                 "sender_id" => auth()->user()->id,
-                "payed_amount" => $request->product_amount * $request->quantity
+                "payed_amount" => $request->product_amount * $request->quantity,
+                "product_title" => $request->product_name,
+                "transaction_id" => $stripe->id,
+                "gift_transaction_id" => $data->transactionId,
+                "platform" => "RELODLY"
             ]);
-          }else{
-            Billing::create([
-                "product_id" => $request->product_id, 
-                "status" => AppConst::PENDING, 
-                "recipient_email" => $request->email, 
-                "recipient_phone" => $request->phone , 
-                "recipient_country_code" => $request->country_code, 
-                "quantity" => $request->quantity , 
-                "unit_price" => $request->product_amount,
-                "sender_id" => auth()->user()->id,
-                "payed_amount" => $request->product_amount * $request->quantity
-            ]);
-          }
 
           return redirect()->route('successPurchase');
 

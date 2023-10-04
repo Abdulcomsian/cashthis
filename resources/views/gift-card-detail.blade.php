@@ -59,15 +59,13 @@ button.close.remove-error {
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                    @else
-                    <h1>Nothing Set</h1>
                     @endif
                     
                     <form method="POST" action="{{route('purchaseGiftCard')}}" id="card-form">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$cardDetail->productId}}">
                         <input type="hidden" name="product_amount" value="{{$cardDetail->denominationType == "FIXED" ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minSenderDenomination[0]}}">
-
+                        <input type="hidden" name="product_name" value="{{$cardDetail->productName}}">
                         <div class="form-group mb-3">
                           <label for="email">Recipient Email</label>
                           <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Recipient Email">
@@ -118,7 +116,7 @@ button.close.remove-error {
                         </div>
 
                         <div class="mb-3">
-                            <label for="card" class="inline-block font-bold mb-2 uppercase text-sm tracking-wider">Enter Stripe Detail</label>
+                            <label for="card" class="inline-block font-bold mb-2 uppercase text-sm tracking-wider">Enter Card Detail</label>
                 
                             <div class="bg-gray-100 p-6 rounded-xl">
                                 <div id="card"></div>
