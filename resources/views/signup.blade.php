@@ -38,6 +38,14 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <style>
+        .form-error-message{
+          width: 100%;
+          margin-top: 0.25rem;
+          font-size: 0.875em;
+          color: #dc3545;
+        }
+    </style>
   </head>
   <body>
     <div>
@@ -94,7 +102,7 @@
           <div class="logo-section">
             <div>
               <a href="./index.html"
-                ><img src="./assets/images/Frame 126.png" alt="logo"
+                ><img src="{{asset('assets/images/Frame126.png')}}" alt="logo"
               /></a>
             </div>
           </div>
@@ -112,104 +120,68 @@
                 <div class="text-line-2">
                   <span data-translate="already-have-an-account">
                     Already have an account?
-                    <a href="./login.html" data-translate="log-in">Log in</a>
+                    <a href="{{route('login')}}" data-translate="log-in">Log in</a>
                   </span>
                 </div>
               </div>
+              
+             
               <div class="form-container">
-                <form>
+                <form method="POST" action="{{ url('register') }}">
+                  @csrf
                   <div class="nav-div">
                     <div>
-                      <label
-                        for="firstname"
-                        class="form-label"
-                        data-translate="first-name"
-                        >First Name</label
-                      >
-                      <input
-                        style="width: 100%"
-                        type="text"
-                        class="form-control"
-                        id="firstname"
-                        placeholder="First Name"
-                      />
+                      <label for="firstname" class="form-label"  data-translate="first-name">First Name</label>
+                      <input style="width: 100%" type="text" class="form-control mb-1" name="first_name" id="firstname" placeholder="First Name"/>
+                      @error('first_name')
+                            <span class="form-error-message" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                      @enderror
                     </div>
                     <div>
-                      <label
-                        for="lastname"
-                        class="form-label"
-                        data-translate="last-name"
-                        >Last Name</label
-                      >
-                      <input
-                        style="width: 100%"
-                        type="text"
-                        class="form-control"
-                        id="lastname"
-                        placeholder="Last Name"
-                      />
+                      <label for="lastname" class="form-label" data-translate="last-name" >Last Name</label>
+                      <input style="width: 100%" type="text" class="form-control mb-1" name="last_name" id="lastname" placeholder="Last Name"/>
+                      @error('last_name')
+                            <span class="form-error-message" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                      @enderror
                     </div>
                   </div>
-                  <div>
-                    <label for="email" class="form-label" data-translate="email"
-                      >Email</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="email"
-                      placeholder="Your Email"
-                    />
+                  <div class="mt-4">
+                    <label for="email" class="form-label" data-translate="email">Email</label>
+                    <input type="text" class="form-control mb-1" id="email" name="email" placeholder="Your Email"/>
+                    @error('email')
+                            <span class="form-error-message" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                    @enderror
                   </div>
-                  <div class="d-flex flex-column">
-                    <label
-                      for="phone"
-                      class="form-label"
-                      data-translate="phone-number"
-                    >
-                      Phone Number
-                    </label>
-                    <input
-                      type="number"
-                      id="phone"
-                      class="form-control"
-                      name="phone"
-                      placeholder="123456789"
-                    />
+                  <div class="d-flex flex-column mt-4">
+                    <label for="phone" class="form-label" data-translate="phone-number">Phone Number</label>
+                    <input type="number" id="phone" class="form-control mb-1" name="phone" name="phone" placeholder="123456789" />
+                    @error('phone')
+                            <span class="form-error-message" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                    @enderror
                   </div>
                   <div>
-                    <label
-                      for="password"
-                      class="form-label"
-                      id="pass"
-                      data-translate="password"
-                      >Password</label
-                    >
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="password"
-                      placeholder="********"
-                    />
+                    <label for="password" class="form-label" id="pass" data-translate="password" >Password</label>
+                    <input type="password" class="form-control mb-1" id="password" name="password" placeholder="********" />
+                    @error('password')
+                            <span class="form-error-message" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                    @enderror
                   </div>
-                  <div>
-                    <label
-                      for="confirmpassword"
-                      class="form-label"
-                      data-translate="confirm-password"
-                      >Confirm Password</label
-                    >
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="confirmpassword"
-                      placeholder="********"
-                    />
+                  <div class="mt-4">
+                    <label for="confirmpassword" class="form-label" data-translate="confirm-password" >Confirm Password</label >
+                    <input type="password" class="form-control mb-1" id="confirmpassword" name="password_confirmation" placeholder="********" />
                   </div>
-                  <div>
-                    <button type="submit" data-translate="sign-up">
-                      Sign Up
-                    </button>
+                  <div class="mt-2">
+                    <button type="submit" data-translate="sign-up">Sign Up</button>
                   </div>
                 </form>
               </div>
@@ -227,7 +199,7 @@
           separateDialCode: true,
         });
 
-        input.classList.add("form-control")
+        input.classList.add("form-control mb-1")
       </script> -->
   </body>
 </html>

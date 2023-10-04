@@ -32,6 +32,14 @@
       crossorigin="anonymous"
     ></script>
 
+    <style>
+      .form-error-message{
+          width: 100%;
+          margin-top: 0.25rem;
+          font-size: 0.875em;
+          color: #dc3545;
+        }
+    </style>
 
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.12/build/css/intlTelInput.css"> -->
 
@@ -89,7 +97,7 @@
           <div class="logo-section">
             <div>
               <a href="./index.html"
-                ><img src="./assets/images/Frame 126.png" alt="logo"
+                ><img src="{{asset('assets/images/Frame126.png')}}" alt="logo"
               /></a>
             </div>
           </div>
@@ -114,29 +122,26 @@
               </div> -->
               
               <div class="form-container">
-                <form>
+                <form method="POST" action="{{route('login')}}">
+                  @csrf
                   <div id="emails">
                     <label for="email" class="form-label"  data-translate="email">Email</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="email"
-                      placeholder ="Your Email "
-                    />
+                    <input type="text" class="form-control" name="email" id="email" placeholder ="Your Email " />
+                    @error('email')
+                          <span class="form-error-message" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                    @enderror
                   </div>
 
-                  <div id="numd"  class="mb-3 d-flex flex-column" style="display: none !important; ">
-                    <label for="phone" class="form-label" data-translate="phone-number">Phone Number</label>
-                    <input type="tel" id="phone-input" class="form-control" placeholder="50 444 555">
-                  </div>
                   <div>
                     <label for="password" class="form-label" data-translate="password">Password</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="password"
-                      placeholder="********"
-                    />
+                    <input type="password" class="form-control" name="password" id="password" placeholder="********" />
+                    @error('password')
+                          <span class="form-error-message" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                    @enderror
                   </div>
                   <div>
                     <button type="submit" data-translate="log-in">Log In</button>

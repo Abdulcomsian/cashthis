@@ -2684,6 +2684,14 @@ textarea.form-control-lg {
   color: #dc3545;
 }
 
+
+.form-error-message{
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #dc3545;
+}
+
 .invalid-tooltip {
   position: absolute;
   top: 100%;

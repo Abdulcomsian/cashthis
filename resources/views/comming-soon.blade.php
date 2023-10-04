@@ -13,8 +13,50 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{asset('assets/style/comming-soon.css')}}" rel="stylesheet" />
+        <style>
+            .passcode-area {
+                    height: 40px;
+                    width: 300px;
+                    display: flex;
+                    align-items: center;
+                    background: white;
+                    padding-left: 10px;
+                    justify-content: space-between;
+                    padding: 0px 20px;
+                }
+            .passcode-area input{
+                border: none;
+            }
+            .passcode-area input:focus{
+                outline: none;
+            }
+            .passcode-area button {
+                color: #465F59;
+                border-radius: 55%;
+                width: 32px;
+                border: 2px solid #465F59;
+                font-weight: 900;
+                background: none;
+                rotate: 15deg;
+                height: 32px;
+            }
+
+            .passcode-area button:hover{
+                background: #465F59;
+                color: white;
+            }
+
+            .toast-error {
+                background-color: #bd362f;
+                }
+            .toast-success {
+                background-color: #51a351;
+            }
+        </style>
     </head>
     <body>
         <!-- Background Video-->
@@ -25,39 +67,13 @@
                 <div class="container-fluid px-4 px-lg-0">
                     <h1 class="fst-italic lh-1 mb-4">Our Website is Coming Soon</h1>
                     <p class="mb-5">We're working hard to finish the development of this site. Sign up below to receive updates and to be notified when we launch!</p>
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
-                    <!-- <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                        <!-- Email address input-->
-                        <!-- <div class="row input-group-newsletter">
-                            <div class="col"><input class="form-control" id="email" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
-                            <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">Notify Me!</button></div>
-                        </div>
-                        <div class="invalid-feedback mt-2" data-sb-feedback="email:required">An email is required.</div>
-                        <div class="invalid-feedback mt-2" data-sb-feedback="email:email">Email is not valid.</div> -->
-                        <!-- Submit success message-->
-                        <!---->
-                        <!-- This is what your users will see when the form-->
-                        <!-- has successfully submitted-->
-                        <!-- <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3 mt-2">
-                                <div class="fw-bolder">Form submission successful!</div>
-                                To activate this form, sign up at
-                                <br />
-                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                            </div>
-                        </div> -->
-                        <!-- Submit error message-->
-                        <!---->
-                        <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
-                        <!-- <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
-                    </form> --> 
+                    <div class="passcode-area">
+                        <input type="text" name="passcode" id="passcode" placeholder="Enter Passcode"/>
+                        <button id="passcode-btn">&#x2713;</button>
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
@@ -74,10 +90,36 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="{{asset('assets/js/comming-soon.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+        <script>
+            $(document).on("click" , "#passcode-btn" , function(){
+                let passcode = document.getElementById("passcode").value;
+
+                $.ajax({
+                    type : 'POST',
+                    url : '{{route("set.passcode")}}',
+                    data : {
+                        _token : '{{csrf_token()}}',
+                        passcode : passcode
+                    },
+                    success:function(res){
+                        if(res.status == true){
+                            toastr.success(res.msg);
+                            window.location.href = '{{route("home")}}';
+                        }else{
+                            toastr.error(res.msg);
+                        }
+                    }
+
+                })
+            })
+        </script>
+
     </body>
 </html>
