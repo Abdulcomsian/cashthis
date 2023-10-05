@@ -60,7 +60,7 @@
 
 <div class="container my-5">
     <div class="row">
-            <div class="input-group">
+            <div class="input-group w-100  d-flex justify-content-center">
                 <select class="custom-select iso" id="inputGroupSelect04">
                   <option selected disabled value="">Select Country</option>
                   @foreach ($countries as $country)
@@ -78,7 +78,7 @@
 <div class="container">
     <div class="row">
         <div id="card-container">
-            <h3>Please Select Country</h3>
+            
         </div>
         <div id="pagination-container">
         

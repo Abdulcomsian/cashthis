@@ -22,6 +22,7 @@ Route::get('comming-soon', [HomeController::class , 'commingSoon'])->name('commi
 Route::post('set-passcode' , [PasscodeController::class , 'setPasscode'])->name('set.passcode');
 Route::get('login', [HomeController::class , 'login'])->name('login');
 Route::get('signup', [HomeController::class , 'register'])->name('register');
+Route::get('forget-password', [HomeController::class , 'forgetPassword'])->name('forgetPassword');
 
 
 Route::group(['middleware' => ['check.passcode']] , function(){
@@ -32,8 +33,6 @@ Route::group(['middleware' => ['check.passcode']] , function(){
     Route::get('contact', [HomeController::class , 'contact'])->name('contact');
     Route::get('privacy-policy', [HomeController::class , 'policy'])->name('policy');
     Route::get('sell-card', [HomeController::class , 'card'])->name('card');
-    Route::get('forget-password', [HomeController::class , 'forgetPassword'])->name('forgetPassword');
-
     
 });
 

@@ -35,6 +35,12 @@ button.close.remove-error {
     color: #842029;
     font-weight: bold;
 }
+
+
+.loading{
+    width: 28px;
+}
+
 </style>
 @endsection
 
@@ -66,6 +72,7 @@ button.close.remove-error {
                         <input type="hidden" name="product_id" value="{{$cardDetail->productId}}">
                         <input type="hidden" name="product_amount" value="{{$cardDetail->denominationType == "FIXED" ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minSenderDenomination[0]}}">
                         <input type="hidden" name="product_name" value="{{$cardDetail->productName}}">
+                        <input type="hidden" name="quantity" value="1">
                         <div class="form-group mb-3">
                           <label for="email">Recipient Email</label>
                           <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Recipient Email">
@@ -107,13 +114,13 @@ button.close.remove-error {
                             @enderror
                         </div>
 
-                        <div class="form-group my-3">
+                        {{-- <div class="form-group my-3">
                             <label for="quantity">Quantity</label>
                             <input type="number" class="form-control" name="quantity" id="quantity" aria-describedby="quantityHelp" placeholder="1" min="1" value="1">
                             @error('quantity')
                                 <small class="form-text text-danger">{{$msg}}</small>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <label for="card" class="inline-block font-bold mb-2 uppercase text-sm tracking-wider">Enter Card Detail</label>
@@ -123,7 +130,7 @@ button.close.remove-error {
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Purchase</button>
+                        <button type="submit" class="btn btn-primary">Purchase <img class="loading d-none" src="{{asset('assets/images/white-loading.gif')}}" alt=""></button>
                       </form>
                 </div>
             </div>
@@ -133,6 +140,7 @@ button.close.remove-error {
 
 @section('page-script')
 <script src="https://js.stripe.com/v3/"></script>
+<script src="{{asset('assets/plugins/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js')}}"></script>
     <script>
         let stripe = Stripe('{{ env("STRIPE_KEY") }}')
         const elements = stripe.elements()
@@ -158,6 +166,7 @@ button.close.remove-error {
             if (error) {
                 console.log(error)
             } else {
+                document.querySelector(".loading").classList.remove("d-none");
                 let input = document.createElement('input')
                 input.setAttribute('type', 'hidden')
                 input.setAttribute('name', 'payment_method')
@@ -171,6 +180,10 @@ button.close.remove-error {
 
         $(document).on("click" , ".remove-error" , function(){
             $(".alert-danger").alert('close')
+        })
+
+        $(document).ready(function(){
+            $('#phone').mask('(000) 0000-0000');
         })
     </script>
 @endsection

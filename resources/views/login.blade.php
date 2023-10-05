@@ -110,7 +110,7 @@
                 <div class="text-line-2">
                   <span data-translate="account">
                     Don't have any account? 
-                    <a href="./signup.html" data-translate="sign-up">Sign Up</a>
+                    <a href="{{route('register')}}" data-translate="sign-up">Sign Up</a>
                   </span>
                   
                 </div>

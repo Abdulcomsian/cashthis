@@ -98,14 +98,15 @@
               <div class="text-container">
                 
                 <div class="text-line-2">
-                  <span data-translate="account">
+                  <span data-translate="account text-center">
                     Enter the email associated with your account and we'll send you a link to reset your password.
                   </span>
                   
                 </div>
               </div>
               <div class="form-container">
-                <form>
+                <form action="{{route('password.email')}}" method="POST">
+                    @csrf
                     <div id="emails">
                         <label for="email" class="form-label">Email</label>
                         <input name="email" type="text" class="form-control" id="email" placeholder="Email"  required/>
