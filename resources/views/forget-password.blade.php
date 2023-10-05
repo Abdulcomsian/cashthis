@@ -88,8 +88,8 @@
         <div class="right-login-side">
           <div class="logo-section">
             <div>
-              <a href="./index.html"
-                ><img src="{{asset('assets/images/Frame126.png')}}" alt="logo"
+              <a href="{{route('home')}}">
+                <img src="{{asset('assets/images/Frame126.png')}}" alt="logo"
               /></a>
             </div>
           </div>
