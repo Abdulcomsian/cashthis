@@ -101,7 +101,7 @@
         <div class="right-signup-side mb-4">
           <div class="logo-section">
             <div>
-              <a href="./index.html"
+              <a href="/"
                 ><img src="{{asset('assets/images/Frame126.png')}}" alt="logo"
               /></a>
             </div>

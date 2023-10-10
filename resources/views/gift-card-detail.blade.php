@@ -6,36 +6,37 @@
 @endsection
 
 @section('css-link')
-<link rel="stylesheet" href="{{asset('assets/style/contact.css')}}" />
-<style>
-    img.card-logo {
-    width: 500px;
-}
+    <link rel="stylesheet" href="{{ asset('assets/style/contact.css') }}" />
+    <style>
+        img.card-logo {
+            width: 500px;
+        }
 
-form#card-form {
-    width: 468px;
-}
+        form#card-form {
+            width: 468px;
+        }
 
-.custom-select{
-    width: 468px;
-    height: 55px;
-    border: 1px solid #8b8b8b;
-}
-.alert{
-    position: relative;
-}
+        .custom-select {
+            width: 468px;
+            height: 55px;
+            border: 1px solid #8b8b8b;
+        }
 
-button.close.remove-error {
-    background: none;
-    border: none;
-    font-size: 25px;
-    position: absolute;
-    top: 7px;
-    right: 8px;
-    color: #842029;
-    font-weight: bold;
-}
-</style>
+        .alert {
+            position: relative;
+        }
+
+        button.close.remove-error {
+            background: none;
+            border: none;
+            font-size: 25px;
+            position: absolute;
+            top: 7px;
+            right: 8px;
+            color: #842029;
+            font-weight: bold;
+        }
+    </style>
 @endsection
 
 
@@ -43,43 +44,48 @@ button.close.remove-error {
     <div class="container">
         <div class="row">
             <div class="col-6 d-flex justify-content-center flex-column">
-                @if(isset($cardDetail->logoUrls) && sizeof($cardDetail->logoUrls) > 0 )
-                <img class="card-logo w-100" src="{{$cardDetail->logoUrls[0]}}" alt="">
+                @if (isset($cardDetail->logoUrls) && sizeof($cardDetail->logoUrls) > 0)
+                    <img class="card-logo w-100" src="{{ $cardDetail->logoUrls[0] }}" alt="">
                 @endif
-                <p class="text-center">{{$cardDetail->productName}}</p>
-                <p class="text-center">{{$cardDetail->brand->brandName}}</p>
-                <p class="text-center"><strong>Amount:</strong> {{$cardDetail->denominationType == "FIXED" ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minSenderDenomination[0]}} {{$cardDetail->recipientCurrencyCode}}</p>
+                <p class="text-center">{{ $cardDetail->productName }}</p>
+                <p class="text-center">{{ $cardDetail->brand->brandName }}</p>
+                <p class="text-center"><strong>Amount:</strong>
+                    {{ $cardDetail->denominationType == 'FIXED' ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minSenderDenomination[0] }}
+                    {{ $cardDetail->recipientCurrencyCode }}</p>
             </div>
             <div class="col-6">
                 <div class="card">
-                    @if(Session::has('status') && !session('status'))
-                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Error!</strong> {{session::get('error')}}
-                        <button type="button" class="close remove-error" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
+                    @if (Session::has('status') && !session('status'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error!</strong> {{ session::get('error') }}
+                            <button type="button" class="close remove-error" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     @endif
-                    
-                    <form method="POST" action="{{route('purchaseGiftCard')}}" id="card-form">
+
+                    <form method="POST" action="{{ route('purchaseGiftCard') }}" id="card-form">
                         @csrf
-                        <input type="hidden" name="product_id" value="{{$cardDetail->productId}}">
-                        <input type="hidden" name="product_amount" value="{{$cardDetail->denominationType == "FIXED" ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minSenderDenomination[0]}}">
-                        <input type="hidden" name="product_name" value="{{$cardDetail->productName}}">
+                        <input type="hidden" name="product_id" value="{{ $cardDetail->productId }}">
+                        <input type="hidden" name="product_amount"
+                            value="{{ $cardDetail->denominationType == 'FIXED' ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minSenderDenomination[0] }}">
+                        <input type="hidden" name="product_name" value="{{ $cardDetail->productName }}">
                         <div class="form-group mb-3">
-                          <label for="email">Recipient Email</label>
-                          <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter Recipient Email">
-                          @error('email')
-                            <small class="form-text text-danger">{{$msg}}</small>
-                          @enderror
+                            <label for="email">Recipient Email</label>
+                            <input type="email" class="form-control" name="email" id="email"
+                                aria-describedby="emailHelp" placeholder="Enter Recipient Email">
+                            @error('email')
+                                <small class="form-text text-danger">{{ $msg }}</small>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
-                          <label for="phone">Recipient Phone</label>
-                          <input type="text" class="form-control" name="phone" id="phone" aria-describedby="emailHelp" placeholder="Enter Recipient Phone">
-                          @error('phone')
-                            <small class="form-text text-danger">{{$msg}}</small>
-                          @enderror
+                            <label for="phone">Recipient Phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone"
+                                aria-describedby="emailHelp" placeholder="Enter Recipient Phone">
+                            @error('phone')
+                                <small class="form-text text-danger">{{ $msg }}</small>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
@@ -88,7 +94,7 @@ button.close.remove-error {
                                 <select class="custom-select iso" name="country_code" id="inputGroupSelect04">
                                     <option selected disabled value="">Select Country</option>
                                     @foreach ($countries as $country)
-                                      <option value="{{$country->iso_name}}">{{$country->country_name}}</option>
+                                        <option value="{{ $country->iso_name }}">{{ $country->country_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -101,30 +107,33 @@ button.close.remove-error {
 
                         <div class="form-group my-3">
                             <label for="text">Name</label>
-                            <input type="text" class="form-control" name="sender_name" id="sender-name" aria-describedby="nameHelp" placeholder="Enter Sender Name">
+                            <input type="text" class="form-control" name="sender_name" id="sender-name"
+                                aria-describedby="nameHelp" placeholder="Enter Sender Name">
                             @error('sender_name')
-                                <small class="form-text text-danger">{{$msg}}</small>
+                                <small class="form-text text-danger">{{ $msg }}</small>
                             @enderror
                         </div>
 
                         <div class="form-group my-3">
                             <label for="quantity">Quantity</label>
-                            <input type="number" class="form-control" name="quantity" id="quantity" aria-describedby="quantityHelp" placeholder="1" min="1" value="1">
+                            <input type="number" class="form-control" name="quantity" id="quantity"
+                                aria-describedby="quantityHelp" placeholder="1" min="1" value="1">
                             @error('quantity')
-                                <small class="form-text text-danger">{{$msg}}</small>
+                                <small class="form-text text-danger">{{ $msg }}</small>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="card" class="inline-block font-bold mb-2 uppercase text-sm tracking-wider">Enter Card Detail</label>
-                
+                            <label for="card" class="inline-block font-bold mb-2 uppercase text-sm tracking-wider">Enter
+                                Card Detail</label>
+
                             <div class="bg-gray-100 p-6 rounded-xl">
                                 <div id="card"></div>
                             </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Purchase</button>
-                      </form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -132,9 +141,9 @@ button.close.remove-error {
 @endsection
 
 @section('page-script')
-<script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
-        let stripe = Stripe('{{ env("STRIPE_KEY") }}')
+        let stripe = Stripe('{{ env('STRIPE_KEY') }}')
         const elements = stripe.elements()
         const cardElement = elements.create('card', {
             style: {
@@ -148,7 +157,10 @@ button.close.remove-error {
         cardElement.mount('#card')
         cardForm.addEventListener('submit', async (e) => {
             e.preventDefault()
-            const { paymentMethod, error } = await stripe.createPaymentMethod({
+            const {
+                paymentMethod,
+                error
+            } = await stripe.createPaymentMethod({
                 type: 'card',
                 card: cardElement,
                 billing_details: {
@@ -169,7 +181,7 @@ button.close.remove-error {
 
 
 
-        $(document).on("click" , ".remove-error" , function(){
+        $(document).on("click", ".remove-error", function() {
             $(".alert-danger").alert('close')
         })
     </script>

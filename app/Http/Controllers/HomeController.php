@@ -6,67 +6,63 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         return view('index');
-    
     }
 
-    public function gurantee(){
-        
+    public function gurantee()
+    {
+
         return view('gurantee');
+    }
 
-    } 
-
-    public function condition(){
+    public function condition()
+    {
 
         return view('condition-of-use');
-
     }
 
-    public function contact(){
-       
+    public function contact()
+    {
+
         return view('contact');
-        
     }
 
-    public function policy(){
+    public function policy()
+    {
 
         return view('privacy-policy');
-
     }
 
-    public function card(){
+    public function card()
+    {
 
         return view('sell-card');
-
     }
 
-    public function forgetPassword(){
+    public function forgetPassword()
+    {
 
         return view('forget-password');
-
     }
 
-    public function login(){
+    public function login()
+    {
 
         return view('login');
-
     }
 
-    public function register(){
+    public function register()
+    {
 
         return view('signup');
-
     }
 
-
-    public function commingSoon(){
+    public function commingSoon()
+    {
 
         return view('comming-soon');
-
     }
-
-
-
 }
