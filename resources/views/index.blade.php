@@ -5,10 +5,10 @@
 @endsection
 
 @section('css-link')
-<link rel="stylesheet" href="{{asset('assets/style/style.css')}}" />
+    <link rel="stylesheet" href="{{ asset('assets/style/style.css') }}" />
 @endsection
 
-    <!-- section 2  -->
+<!-- section 2  -->
 @section('content')
     <div class="section-2">
         <div class="container px-5 py-5">
@@ -16,9 +16,9 @@
                 Imagine what it feels like to save every. single. time.
             </div>
             <!-- <div class="para text-center mt-4 m-auto">
-                Lorem ipsum dolor sit amet consectetur. Vitae sit elementum vitae quis nibh pellentesque tempor lorem
-                enim. Scelerisque egestas turpis egestas lacus iaculis lacus augue condimentum.
-            </div> -->
+                    Lorem ipsum dolor sit amet consectetur. Vitae sit elementum vitae quis nibh pellentesque tempor lorem
+                    enim. Scelerisque egestas turpis egestas lacus iaculis lacus augue condimentum.
+                </div> -->
         </div>
 
     </div>
@@ -37,9 +37,10 @@
                         <label class="radio-label" for="buyingRadio"></label>
                     </div>
                     <!-- <div class="para-1 mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor.
-                    </div> -->
-                    <div class="mt-3"> <a href="">Get in touch with us <img src="./assets/images/Arrow 2.png" alt="">
+                            tempor.
+                        </div> -->
+                    <div class="mt-3"> <a href="">Get in touch with us <img src="./assets/images/Arrow 2.png"
+                                alt="">
                         </a>
                     </div>
                 </div>
@@ -65,11 +66,11 @@
                             </div>
                         </div>
                         <!-- <div class="col-md-6 mt-4">
-                            <div class="box "> 04</div>
-                            <div class="small-heading mt-3">Protect yourself </div>
-                            <div class="para-2">Euismod faucibus turpis eu gravida mi. Pellentesque et velit aliquam .
-                            </div>
-                        </div> -->
+                                <div class="box "> 04</div>
+                                <div class="small-heading mt-3">Protect yourself </div>
+                                <div class="para-2">Euismod faucibus turpis eu gravida mi. Pellentesque et velit aliquam .
+                                </div>
+                            </div> -->
                     </div>
 
                     <div class="row d-none" id="buying">
@@ -93,11 +94,11 @@
                             </div>
                         </div>
                         <!-- <div class="col-md-6 mt-4">
-                            <div class="box "> 04</div>
-                            <div class="small-heading mt-3">Protect yourself </div>
-                            <div class="para-2">Euismod faucibus turpis eu gravida mi. Pellentesque et velit aliquam .
-                            </div>
-                        </div> -->
+                                <div class="box "> 04</div>
+                                <div class="small-heading mt-3">Protect yourself </div>
+                                <div class="para-2">Euismod faucibus turpis eu gravida mi. Pellentesque et velit aliquam .
+                                </div>
+                            </div> -->
                     </div>
                 </div>
 
@@ -107,21 +108,21 @@
     <!-- section-4  -->
 
     <!-- <div class="section-4">
-        <div class="container px-3 pt-3">
-            <div class="row pt-5 justify-content-between">
-                <div class="col-md-6">
-                    <img class="sec-4-img" src="./assets/images/card.png" alt="">
-                </div>
-                <div class="col-md-5 right">
-                    <div class="heading-3 ">Lorem ipsum dolor sit amet consectetur.</div>
-                    <div class="para-3 mt-4"> Lorem ipsum dolor sit amet consectetur. Sagittis integer morbi dictum
-                        rutrum pellentesque aliquam. Fames iaculis cursus aliquet sagittis mattis.</div>
-                    <div class="mt-3 link"> <a href="">Get in touch with us <img src="./assets/images/Arrow 2.png"
-                        alt=""> </a></div>
+            <div class="container px-3 pt-3">
+                <div class="row pt-5 justify-content-between">
+                    <div class="col-md-6">
+                        <img class="sec-4-img" src="./assets/images/card.png" alt="">
+                    </div>
+                    <div class="col-md-5 right">
+                        <div class="heading-3 ">Lorem ipsum dolor sit amet consectetur.</div>
+                        <div class="para-3 mt-4"> Lorem ipsum dolor sit amet consectetur. Sagittis integer morbi dictum
+                            rutrum pellentesque aliquam. Fames iaculis cursus aliquet sagittis mattis.</div>
+                        <div class="mt-3 link"> <a href="">Get in touch with us <img src="./assets/images/Arrow 2.png"
+                            alt=""> </a></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div> -->
+        </div> -->
 
     <!-- section-5  -->
     <div class="section-5 py-4">
@@ -132,7 +133,7 @@
                 <div class="col-md-6 m-auto">
                     <div class="heading-4 "> Refer A friend</div>
                     <!-- <div class="para-4"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua.</div> -->
+                            incididunt ut labore et dolore magna aliqua.</div> -->
 
                 </div>
                 <div class="col-md-2 d-flex justify-content-md-end"> <button class="btn-2 m-md-auto ">Get Link</button>
@@ -262,32 +263,29 @@
             </div>
         </div>
     </div>
-
-   
 @endsection
 @section('page-script')
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const sellingRadio = document.getElementById("sellingRadio");
             const buyingRadio = document.getElementById("buyingRadio");
             const sellingDiv = document.getElementById("selling");
             const buyingDiv = document.getElementById("buying");
 
-            setInterval(function () {
+            setInterval(function() {
                 sellingDiv.classList.toggle("d-none");
                 buyingDiv.classList.toggle("d-none");
             }, 2000);
 
-            sellingRadio.addEventListener("click", function () {
+            sellingRadio.addEventListener("click", function() {
                 sellingDiv.classList.remove("d-none");
                 buyingDiv.classList.add("d-none");
             });
 
-            buyingRadio.addEventListener("click", function () {
+            buyingRadio.addEventListener("click", function() {
                 sellingDiv.classList.add("d-none");
                 buyingDiv.classList.remove("d-none");
             });
         });
     </script>
-
 @endsection
