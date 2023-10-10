@@ -8,16 +8,12 @@
 @section('css-link')
     <link rel="stylesheet" href="{{ asset('assets/style/contact.css') }}" />
     <style>
-        img.card-logo {
-            width: 500px;
-        }
-
-        form#card-form {
-            width: 468px;
+        * {
+            font-family: "Lato";
         }
 
         .custom-select {
-            width: 468px;
+            width: 100%;
             height: 55px;
             border: 1px solid #8b8b8b;
         }
@@ -37,29 +33,89 @@
             font-weight: bold;
         }
 
+        .loading {
+            width: 28px;
+        }
 
-.loading{
-    width: 28px;
-}
+        .gift-details {
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
 
+        .gift-details .gift-card-details {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem
+        }
+
+        .gift-details .gift-card-details div img {
+            width: auto;
+            height: 440px;
+        }
+
+        .gift-details .gift-card-details div .heading {
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .gift-details .gift-card-details div span {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .gift-details .recipient-card-details .card {
+            padding: 6%
+        }
+
+        .gift-details .recipient-card-details .card form {
+            width: 100%;
+            margin: 0%
+        }
+
+        .gift-details .recipient-card-details .card label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 1%
+        }
+
+        .gift-details .recipient-card-details .card button {
+            float: right;
+            background-color: #5570F1;
+            color: #ffffff
+        }
     </style>
 @endsection
 
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-6 d-flex justify-content-center flex-column">
-                @if (isset($cardDetail->logoUrls) && sizeof($cardDetail->logoUrls) > 0)
-                    <img class="card-logo w-100" src="{{ $cardDetail->logoUrls[0] }}" alt="">
-                @endif
-                <p class="text-center">{{ $cardDetail->productName }}</p>
-                <p class="text-center">{{ $cardDetail->brand->brandName }}</p>
-                <p class="text-center"><strong>Amount:</strong>
-                    {{ $cardDetail->denominationType == 'FIXED' ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minSenderDenomination[0] }}
-                    {{ $cardDetail->recipientCurrencyCode }}</p>
+        <div class="row gift-details">
+            <div class="col-6 gift-card-details align-items-center">
+                <div>
+                    @if (isset($cardDetail->logoUrls) && sizeof($cardDetail->logoUrls) > 0)
+                        <img class="card-logo" src="{{ $cardDetail->logoUrls[0] }}" alt="">
+                    @endif
+                </div>
+                <div>
+                    <span>
+                        {{ $cardDetail->productName }}
+                    </span>
+                </div>
+                <div>
+                    <span>
+                        {{ $cardDetail->brand->brandName }}
+                    </span>
+                </div>
+                <div>
+                    <span class="heading">Amount:</span>
+                    <span>
+                        {{ $cardDetail->denominationType == 'FIXED' ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minSenderDenomination[0] }}
+                        {{ $cardDetail->recipientCurrencyCode }}
+                    </span>
+                </div>
             </div>
-            <div class="col-6">
+            <div class="col-6 recipient-card-details">
                 <div class="card">
                     @if (Session::has('status') && !session('status'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -120,16 +176,6 @@
                                 <small class="form-text text-danger">{{ $msg }}</small>
                             @enderror
                         </div>
-
-                        {{-- <div class="form-group my-3">
-                            <label for="quantity">Quantity</label>
-                            <input type="number" class="form-control" name="quantity" id="quantity"
-                                aria-describedby="quantityHelp" placeholder="1" min="1" value="1">
-                            @error('quantity')
-                                <small class="form-text text-danger">{{ $msg }}</small>
-                            @enderror
-                        </div> --}}
-
                         <div class="mb-3">
                             <label for="card" class="inline-block font-bold mb-2 uppercase text-sm tracking-wider">Enter
                                 Card Detail</label>
@@ -139,7 +185,8 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Purchase <img class="loading d-none" src="{{asset('assets/images/white-loading.gif')}}" alt=""></button>
+                        <button type="submit" class="btn">Purchase <img class="loading d-none"
+                                src="{{ asset('assets/images/white-loading.gif') }}" alt=""></button>
                     </form>
                 </div>
             </div>
@@ -149,7 +196,7 @@
 
 @section('page-script')
     <script src="https://js.stripe.com/v3/"></script>
-<script src="{{asset('assets/plugins/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js') }}"></script>
     <script>
         let stripe = Stripe('{{ env('STRIPE_KEY') }}')
         const elements = stripe.elements()
@@ -194,7 +241,7 @@
             $(".alert-danger").alert('close')
         })
 
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#phone').mask('(000) 0000-0000');
         })
     </script>

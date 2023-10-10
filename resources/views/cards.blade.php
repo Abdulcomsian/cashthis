@@ -41,8 +41,8 @@
         }
 
         /* .main-card .card {
-                                        height: 100% !important;
-                                    } */
+                                                            height: 100% !important;
+                                                        } */
 
         .main-card .card img {
             height: 240px;
