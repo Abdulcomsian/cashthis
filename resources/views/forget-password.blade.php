@@ -87,7 +87,8 @@
                             </div>
                         </div>
                         <div class="form-container">
-                            <form>
+                <form action="{{route('password.email')}}" method="POST">
+                    @csrf
                                 <div id="emails">
                                     <label for="email" class="form-label">Email</label>
                                     <input name="email" type="text" class="form-control" id="email"

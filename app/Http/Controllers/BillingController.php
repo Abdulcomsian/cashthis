@@ -9,7 +9,7 @@ use Stripe\StripeClient;
 use Stripe\Exception\CardException;
 use GuzzleHttp\Client;
 use App\Models\{Billing};
-
+use GuzzleHttp\Exception\ClientException;
 
 class BillingController extends Controller
 {
@@ -78,14 +78,24 @@ class BillingController extends Controller
                 "recipientPhoneDetails"  => $recipientPhoneDetails,
             ];
 
-            $response = $client->post($url , [
-                            "json" => $payload,
-                            "headers" => $headers,
-                        ]);
+
+                try{
+                    $response = $client->post($url , [
+                                    "json" => $payload,
+                                    "headers" => $headers,
+                                ]);
+
+                                $data = json_decode($response->getBody()->getContents());
+                }
+                catch(ClientException $e){
+                    $errorResponse = json_decode($e->getResponse()->getBody()->getContents());
+                    $errorMsg = $errorResponse->message;
+                    return redirect()->back()->with(['status' => false , 'error' => $errorMsg]);
+                }
 
 
 
-          $data = json_decode($response->getBody()->getContents());
+
 
         
             Billing::create([
