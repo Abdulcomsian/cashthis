@@ -1,14 +1,14 @@
 <div class="d-none">
-    <form method="post" action="{{route('logout')}}" id="logout-form">
-    @csrf
+    <form method="post" action="{{ route('logout') }}" id="logout-form">
+        @csrf
     </form>
 </div>
 
 <style>
-     .dropdown-toggle::after {
-    display: none;
-  }
-    </style>
+    .dropdown-toggle::after {
+        display: none;
+    }
+</style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
@@ -22,42 +22,45 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item m-lg-auto">
-                    <a class="nav-link" href="{{route('home')}}">Home</a>
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item m-lg-auto">
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item m-lg-auto">
-                    <a class="nav-link " href="{{route('useCondition')}}">How It Works</a>
+                    <a class="nav-link " href="{{ route('useCondition') }}">How It Works</a>
                 </li>
                 <li class="nav-item m-lg-auto">
-                    <a class="nav-link " href="{{route('giftCardPage')}}">Gift Cards</a>
+                    <a class="nav-link " href="{{ route('giftCardPage') }}">Gift Cards</a>
                 </li>
-                @if(!auth()->user())
-                <li class="nav-item m-lg-auto d-flex">
-                    <a href="{{route('login')}}" class="btn-1">Sign in</a>
-                    <img class="nav-img  " src="{{asset('assets/images/Vector.png')}}" alt="Image">
-                </li>
+                @if (!auth()->user())
+                    <li class="nav-item m-lg-auto d-flex align-items-center gap-2">
+                        <a href="{{ route('login') }}" class="btn-1">Sign in</a>
+                        <img class="nav-img" src="{{ asset('assets/images/Vector.png') }}" alt="Image">
+                    </li>
                 @endif
                 <!-- <li>
                     <button class="logout-btn">Logout</button>
                 </li> -->
-                @if(auth()->check())
-                <div class="dropdown">
-                     <div class="d-flex align-items-center  dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <!-- Avatar -->
-                        <div class="dropdown p-1 " style="border:1px solid black; border-radius:22px">
-                            <img src="{{asset('assets/images/profile.svg')}}" class="rounded-circle" height="35" alt="Black and White Portrait of a Man" loading="lazy" />
+                @if (auth()->check())
+                    <div class="dropdown">
+                        <div class="d-flex align-items-center  dropdown-toggle" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- Avatar -->
+                            <div class="dropdown p-1 " style="border:1px solid black; border-radius:22px">
+                                <img src="{{ asset('assets/images/profile.svg') }}" class="rounded-circle"
+                                    height="35" alt="Black and White Portrait of a Man" loading="lazy" />
+                            </div>
                         </div>
-                     </div>
-                        @if(auth()->user())
+                        @if (auth()->user())
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{route('userDashboard')}}" role="button">Dashboard</a> 
-                                <a class="dropdown-item" href="{{route('orders')}}" role="button">Orders</a> 
+                                <a class="dropdown-item" href="{{ route('userDashboard') }}"
+                                    role="button">Dashboard</a>
+                                <a class="dropdown-item" href="{{ route('orders') }}" role="button">Orders</a>
                                 <button class="dropdown-item logout-btn">Logout</button>
                             </div>
                         @endif
-                </div>
+                    </div>
                 @endif
             </ul>
 
