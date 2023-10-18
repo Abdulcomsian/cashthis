@@ -64,9 +64,9 @@
                 through a secure gateway provider and are neither stored nor processed on our servers.</div>
 
             <div class="heading-2">Request Removal of Your Information:</div>
-            <div class="para">To request the removal of your data, please contact us at support@cashthis.ai.</div>
+            <div class="para">To request the removal of your data, please contact us at support@GiftHub.ai.</div>
             <div class="para">To unsubscribe from our marketing email list, you can either click the unsubscribe link in
-                any of our marketing emails or contact us at support@cashthis.ai.</div>
+                any of our marketing emails or contact us at support@GiftHub.ai.</div>
 
             <div class="heading-2">Third-party Disclosure:</div>
             <div class="para">We do not share Personal Information with third parties without your consent, except for
@@ -128,7 +128,7 @@
             <div class="para">If you have any questions concerning this privacy policy, please contact us at:</div>
 
             <ul class="mt-2">
-                <li class="list-para" style="list-style: none;">cashthis.ai</li>
+                <li class="list-para" style="list-style: none;">GiftHub.ai</li>
                 <li class="list-para" style="list-style: none;">87 N Raymond Ave, Pasadena CA 91103</li>
                 <li class="list-para" style="list-style: none;">United States </li>
             </ul>
@@ -143,14 +143,14 @@
                 information or allow California customers to opt in or opt out of such sharing.</div>
 
             <div class="heading-2">Links to Other Sites:</div>
-            <div class="para">Cashthis Services may include links to other websites for your convenience and
-                information. Websites operated by entities not affiliated with Cashthis may have their own privacy
-                policies or notices, which we strongly advise you to review. Cashthis is not responsible for the content
+            <div class="para">GiftHub Services may include links to other websites for your convenience and
+                information. Websites operated by entities not affiliated with GiftHub may have their own privacy
+                policies or notices, which we strongly advise you to review. GiftHub is not responsible for the content
                 or privacy practices of any linked websites not under our control.</div>
-            <div class="para">Categories of Personal Information Collected by Cashthis from or about Guests in the Last
+            <div class="para">Categories of Personal Information Collected by GiftHub from or about Guests in the Last
                 12 Months</div>
 
-            <div class="heading-2">Cashthis has collected the following categories of personal information from or about
+            <div class="heading-2">GiftHub has collected the following categories of personal information from or about
                 its guests in the preceding 12 months:</div>
             <ul class="mt-2">
                 <li class="list-para">Identifiers (e.g., name, mailing address, email address, phone number,
@@ -166,10 +166,10 @@
                 <li class="list-para">Inferences drawn from any of the above (e.g., preferences or characteristics).
                 </li>
             </ul>
-            <div class="para">Categories of Sources from which Cashthis has Collected Personal Information about Guests
+            <div class="para">Categories of Sources from which GiftHub has Collected Personal Information about Guests
             </div>
 
-            <div class="heading-2">Cashthis has collected personal information about guests from the following
+            <div class="heading-2">GiftHub has collected personal information about guests from the following
                 categories of sources:</div>
             <ul class="mt-2">
                 <li class="list-para"> Performing services, including maintaining or servicing accounts, providing
@@ -194,7 +194,7 @@
                     controlled by us.</li>
             </ul>
 
-            <div class="heading-2">Cashthis may use the information collected for various purposes, including:</div>
+            <div class="heading-2">GiftHub may use the information collected for various purposes, including:</div>
             <ul class="mt-2">
                 <li class="list-para"> Personalizing and improving your online experience.</li>
                 <li class="list-para">Responding to emails or other requests, inquiries, comments, or questions.</li>
@@ -263,16 +263,16 @@
             <div class="heading-2">Under the California Consumer Privacy Act (CCPA), California residents have certain
                 rights, including:</div>
             <ul class="mt-2">
-                <li class="list-para"> The right to request that Cashthis disclose the personal information or
+                <li class="list-para"> The right to request that GiftHub disclose the personal information or
                     categories of personal information it collects and uses.</li>
-                <li class="list-para"> The right to request that Cashthis delete personal information it has collected
+                <li class="list-para"> The right to request that GiftHub delete personal information it has collected
                     from you.</li>
             </ul>
             <div class="heading-2">If you are a California resident and have an established business relationship with
-                Cashthis, you can request a notice disclosing the categories of personal information we have collected
+                GiftHub, you can request a notice disclosing the categories of personal information we have collected
                 and stored. To request this notice, please send your request to:</div>
             <ul class="mt-2">
-                <li class="list-para" style="list-style: none;"> Cashthis Exchange LLC, Attn: Compliance/California
+                <li class="list-para" style="list-style: none;"> GiftHub Exchange LLC, Attn: Compliance/California
                     Shine the Light Inquiry,</li>
                 <li class="list-para" style="list-style: none;">990 CedarBridge Ave STE B7, RM 365, Brick, NJ 08723.
                 </li>

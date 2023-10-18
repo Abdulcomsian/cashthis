@@ -156,13 +156,13 @@
                                 <div class="number p-3">01</div>
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    What is Cashthis?
+                                    What is GiftHub?
                                 </button>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body px-5">
-                                    <p class="text-2">Cashthis specializes in purchasing unwanted gift cards at a
+                                    <p class="text-2">GiftHub specializes in purchasing unwanted gift cards at a
                                         reduced rate and subsequently offering them at a discounted price to savvy
                                         shoppers nationwide. This platform provides an excellent opportunity to convert
                                         your unused gift cards into cash while enabling you to make substantial savings

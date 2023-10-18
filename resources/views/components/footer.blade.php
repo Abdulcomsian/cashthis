@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-between" style="padding-top: 10%;">
             <div class="col-md-5">
-                <img src="{{asset('assets/images/Frame126.png')}}" alt="">
+                <img src="{{asset('assets/images/Frame127.png')}}" alt="">
                 <div class="text-4 mt-5">Sign up for our sales and savings emails</div>
                 <div class="email mt-3">
                     <input type="email" placeholder="Your email address..">
@@ -29,7 +29,7 @@
 
         <div class="row mt-md-5 justify-content-between g-2">
             <div class="col-md-3">
-                <div class="footer-text"> Copyright © 2023 Cashthis</div>
+                <div class="footer-text"> Copyright © 2023 GiftHub</div>
             </div>
             <div class="col-md-3 d-flex flex-row justify-content-md-center gap-4">
                 <img src="{{asset('assets/images/google.png')}}" alt="">

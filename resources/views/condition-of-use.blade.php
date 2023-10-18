@@ -29,7 +29,7 @@
             <div class="list">
                 <ol>
                     <li class="list-para" data-serial="1."> <span class="font-weight-bold"> Acceptance of
-                            Agreement:</span> <br>Your use of this site (referred to as "www.cashthis.ai") signifies
+                            Agreement:</span> <br>Your use of this site (referred to as "www.GiftHub.ai") signifies
                         your acceptance of the terms and conditions presented in this agreement. This agreement
                         constitutes the sole and comprehensive agreement between you and us, superseding all prior
                         agreements and understandings. We reserve the right to amend this agreement without specific
@@ -81,7 +81,7 @@
                     <li class="list-para" data-serial="9."><span class="font-weight-bold">Gift Card Definition:</span>
                         <br>On this site, "gift card(s)" or "card(s)" refer to physical plastic cards, paper gift
                         certificates, digital gift card numbers with or without pin numbers, or merchandise credits, all
-                        accepted by the issuing retailer in the form they are sold by Cashthis.
+                        accepted by the issuing retailer in the form they are sold by GiftHub.
                     </li>
                     <li class="list-para" data-serial="10."><span class="font-weight-bold">Limits:</span>
                         <br>We disclaim responsibility for any virus-related damages from electronic files. Our maximum
@@ -143,7 +143,7 @@
                     </li>
                     <li class="list-para" data-serial="21."><span class="font-weight-bold">Seller Terms:</span>
                         <br>
-                        Sellers who trade or sell gift cards agree that Cashthis may charge back payments if
+                        Sellers who trade or sell gift cards agree that GiftHub may charge back payments if
                         discrepancies occur due to various reasons, including card use, seller actions, or fraud.
                     </li>
                     <li class="list-para" data-serial="22."><span class="font-weight-bold">Issuer Bankruptcy:</span>

@@ -102,7 +102,7 @@
           <div class="logo-section">
             <div>
               <a href="./index.html"
-                ><img src="{{asset('assets/images/Frame126.png')}}" alt="logo"
+                ><img src="{{asset('assets/images/Frame127.png')}}" alt="logo"
               /></a>
             </div>
           </div>
@@ -114,7 +114,7 @@
                     Get started with
                   </span>
                   <span style="color: #5570f1" data-translate="anjez"
-                    >CashThis</span
+                    >GiftHub</span
                   >
                 </div>
                 <div class="text-line-2">
