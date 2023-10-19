@@ -22,31 +22,15 @@ class GiftcardController extends Controller
    public function giftCardPage(){
         
         $countries = Country::orderBy('country_name' , 'asc')->get();
-        return view('cards')->with(['countries' => $countries]);
+
+        $cards = $this->getCards("US");
+
+        return view('cards')->with(['countries' => $countries , 'cards' => json_encode($cards) ]);
    }
 
     public function getGiftCards(Request $request){
         try{
-            $client = new Client();
-            $isoCode = $request->iso;
-            $url = 'https://giftcards-sandbox.reloadly.com/countries/'.$isoCode.'/products';
-            $headers = [
-                "Accept" => "application/com.reloadly.giftcards-v1+json",
-                "Authorization" =>  "Bearer ".$this->token
-            ];
-
-            $response = $client->get($url , [
-                'headers' => $headers
-            ]);
-    
-            $giftCards = json_decode($response->getBody()->getContents());
-    
-            $cards = [];
-
-            foreach($giftCards as $card)
-            {
-                $cards[] = ["product_id" => $card->productId , "country_iso" => $card->country->isoName , "brand" => $card->brand->brandName , "logo_url" => is_array($card->logoUrls) && sizeof($card->logoUrls) > 0 ?  $card->logoUrls[0] : null ] ;
-            }
+            $cards = $this->getCards($request->iso);
 
             return response()->json(["status" => true , "cards" => $cards]);
             
@@ -56,6 +40,34 @@ class GiftcardController extends Controller
         
         
     }
+
+
+    public function getCards($isoCode){
+        $client = new Client();
+
+        $url = 'https://giftcards-sandbox.reloadly.com/countries/'.$isoCode.'/products';
+        
+        $headers = [
+            "Accept" => "application/com.reloadly.giftcards-v1+json",
+            "Authorization" =>  "Bearer ".$this->token
+        ];
+
+        $response = $client->get($url , [
+            'headers' => $headers
+        ]);
+
+        $giftCards = json_decode($response->getBody()->getContents());
+
+        $cards = [];
+
+        foreach($giftCards as $card)
+        {
+            $cards[] = ["product_id" => $card->productId , "country_iso" => $card->country->isoName , "brand" => $card->brand->brandName , "logo_url" => is_array($card->logoUrls) && sizeof($card->logoUrls) > 0 ?  $card->logoUrls[0] : null ] ;
+        }
+
+        return $cards;
+    }
+
     
     public function giftCardDetail(Request $request , $productId){
         try{

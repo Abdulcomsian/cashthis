@@ -35,7 +35,7 @@
         }
 
         .main-card {
-            width: 30%;
+            width: 20%;
             margin: 20px;
             /* height: 25%; */
         }
@@ -98,7 +98,7 @@
         </div>
     </div>
 
-    <div class="card-section container">
+    <div class="card-section container-fluid">
         <div class="row custom-row">
             <div id="card-heading">
                 <h3 class="text-center">Please Select Country</h3>
@@ -108,7 +108,7 @@
                 <select class="custom-select iso" id="inputGroupSelect04">
                     <option selected disabled value="">Select Country</option>
                     @foreach ($countries as $country)
-                        <option value="{{ $country->iso_name }}">{{ $country->country_name }}</option>
+                        <option value="{{ $country->iso_name }}" @if($country->iso_name == "US") selected @endif>{{ $country->country_name }}</option>
                     @endforeach
                 </select>
                 <div class="input-group-append">
@@ -123,7 +123,11 @@
             </div>
         </div>
     </div>
+
+
 @endsection
+
+
 
 @section('page-script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.6.0/pagination.min.js"
@@ -132,6 +136,16 @@
     <script>
         $(document).ready(function() {
             var isPaginationSet = false;
+
+            (function(){
+                let arrayIs = "{{$cards}}";
+                let decodedJSON = arrayIs.replace(/&quot;/g, '"'); // Replace &quot; with double quotes
+                let cards = JSON.parse(decodedJSON);
+                setPaginationTable(cards);
+            })()
+
+
+
             $(document).on("click", ".filter-card", function() {
                 let iso = document.querySelector(".iso").value;
                 let element = this;
@@ -166,24 +180,26 @@
             })
 
             function setPaginationTable(cards) {
+                console.log(typeof(cards));
                 $('#pagination-container').pagination({
                     dataSource: cards,
-                    pageSize: 10, // Number of cards to display per page
+                    pageSize: 16, // Number of cards to display per page
                     callback: function(data, pagination) {
                         // Clear the card container
                         $('#card-container').empty();
 
                         // Render cards for the current page's data
-                        for (var i = 0; i < data.length; i++) {
-                            var card = data[i];
-                            var cardHtml = `
+                        for (let i = 0; i < data.length; i++) {
+                            let card = data[i];
+                            let cardHtml = `
                                 <div class="main-card" data-product-id="${card.product_id}">
                                     <div class="card">
-                                        <img src="${card.logo_url}" alt="${card.product_id}" />
-                                        <h4 class="text-center py-2">${card.brand} ${card.country_iso}</h4>
-                                        <div class="d-flex justify-content-center p-3">
-                                            <a href="{{ url('gift-card-detail') }}/${card.product_id}" class="btn btn-success view-card-detail" data-product-id="${card.product_id}">Buy Now</a>
-                                        </div>
+                                        <img src="${card.logo_url}" alt="${card.product_id}" />`;
+                            let brand = card.brand !== null ? card.brand : "";
+                            cardHtml +=  `<h4 class="text-center py-2">${brand} ${card.country_iso}</h4>
+                                            <div class="d-flex justify-content-center p-3">
+                                                <a href="{{ url('gift-card-detail') }}/${card.product_id}" class="btn btn-success view-card-detail" data-product-id="${card.product_id}">Buy Now</a>
+                                            </div>
                                     </div>
                                 </div>
                                 `;
