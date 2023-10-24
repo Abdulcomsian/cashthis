@@ -24,20 +24,28 @@
             padding: 1%
         }
 
-        div#card-container {
+        /* div#card-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-        }
+        } */
 
         .custom-row {
             flex-direction: column !important
         }
 
         .main-card {
-            width: 20%;
-            margin: 20px;
+            width: 100%;
+            border-radius: 9px;
+            overflow: hidden;
             /* height: 25%; */
+        }
+        .main-card > div{
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            /* justify-content: space-between  */
+            
         }
 
         /* .main-card .card {
@@ -45,6 +53,7 @@
                                                         } */
 
         .main-card .card img {
+            width: 100%;
             height: 240px;
         }
 
@@ -53,6 +62,7 @@
             gap: 2%;
             padding: 1%
         }
+
 
         .paginationjs .paginationjs-pages li.active>a {
             background: #5570F1;
@@ -65,8 +75,46 @@
             min-height: 47%;
         }
         .country-dropdown-section.input-group {
-            margin-left: 50px;
+            width: 27%;
+            margin: auto;
+            gap: 13px;
+
         }
+        #inputGroupSelect04{
+            text-align: center
+        }
+        .card-section .loading{
+            align-self: center;
+            width: auto !important;
+        }
+        /* Base styles for grid items */
+/* Base styles for grid items */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Desktop layout with 4 columns */
+    gap: 20px; /* Adjust the gap between grid items */
+}
+
+.grid-item {
+    background-color: #3498db;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 1023px) { /* Tablets and smaller */
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns for tablets */
+    }
+}
+
+@media (max-width: 767px) { /* Mobile devices */
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns for mobile devices */
+    }
+}
+
     </style>
 @endsection
 
@@ -98,14 +146,14 @@
         </div>
     </div>
 
-    <div class="card-section container-fluid">
+    <div class="card-section container">
         <div class="row custom-row">
             <div id="card-heading">
                 <h3 class="text-center">Please Select Country</h3>
             </div>
             
-            <div class="country-dropdown-section input-group">
-                <select class="custom-select iso" id="inputGroupSelect04">
+            <div class="country-dropdown-section input-group ">
+                <select class="custom-select iso form-control" id="inputGroupSelect04">
                     <option selected disabled value="">Select Country</option>
                     @foreach ($countries as $country)
                         <option value="{{ $country->iso_name }}" @if($country->iso_name == "US") selected @endif>{{ $country->country_name }}</option>
@@ -114,9 +162,9 @@
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary filter-card" type="button">Submit</button>
                 </div>
-                <img class="loading mx-2 d-none" src="{{ asset('assets/images/loading.gif') }}" alt="">
             </div>
-            <div id="card-container">
+            <img class="loading mx-2 d-none" src="{{ asset('assets/images/loading.gif') }}" alt="">
+            <div class="grid-container mt-5" id="card-container">
             </div>
             <div id="pagination-container">
 
@@ -194,12 +242,13 @@
                             let cardHtml = `
                                 <div class="main-card" data-product-id="${card.product_id}">
                                     <div class="card">
-                                        <img src="${card.logo_url}" alt="${card.product_id}" />`;
+                                        <div>
+                                        <img src="${card.logo_url}" alt="${card.product_id}" /></div>`;
                             let brand = card.brand !== null ? card.brand : "";
-                            cardHtml +=  `<h4 class="text-center py-2">${brand} ${card.country_iso}</h4>
+                            cardHtml +=  `<div class="h-100 d-flex flex-column justify-content-between"><h4 class="text-center py-2">${brand} ${card.country_iso}</h4>
                                             <div class="d-flex justify-content-center p-3">
                                                 <a href="{{ url('gift-card-detail') }}/${card.product_id}" class="btn btn-success view-card-detail" data-product-id="${card.product_id}">Buy Now</a>
-                                            </div>
+                                            </div></div>
                                     </div>
                                 </div>
                                 `;
