@@ -32,7 +32,7 @@
 
                     <div class="d-flex gap-2 mt-2">
                         <input class="radio" type="radio" name="toggle" id="sellingRadio" checked>
-                        <label class="radio-label" for="sellingRadio"></label>
+                        <label class="radio-label active" for="sellingRadio"></label>
                         <input class="radio" type="radio" name="toggle" id="buyingRadio">
                         <label class="radio-label" for="buyingRadio"></label>
                     </div>
@@ -271,10 +271,15 @@
             const buyingRadio = document.getElementById("buyingRadio");
             const sellingDiv = document.getElementById("selling");
             const buyingDiv = document.getElementById("buying");
+            const radioLabels = document.querySelectorAll('.radio-label');
 
             setInterval(function() {
                 sellingDiv.classList.toggle("d-none");
                 buyingDiv.classList.toggle("d-none");
+                radioLabels.forEach(element => {
+                    element.classList.toggle('active')
+                });
+
             }, 2000);
 
             sellingRadio.addEventListener("click", function() {
