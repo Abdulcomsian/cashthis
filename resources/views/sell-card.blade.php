@@ -39,30 +39,24 @@
     <!-- section-3  -->
     <div class="section-3">
         <div class="container d-flex justify-content-center">
-            <div class="offer p-5">
+            <div class="offer p-5 sellCard-container">
                 <div class="row justify-content-between g-3">
-                    <div class="col-md-8">
-                        <div class="input-container">
-                            <input class="input-1" type="text" placeholder="Store ">
-                            <span class="input-icon"></span>
-                        </div>
+                    <input class="input-1 sellInput " type="text" maxlength="16" placeholder="Card Number " >
+                    <div class="p-0 d-flex gap-5">
+                        <div class="exp-wrapper input-2 p-0">
+                            <input autocomplete="off" class="exp " id="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate />
+                            <input autocomplete="off" class="exp " id="year" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate />
+                            </div>
+                        <input class="input-2 sellInput" type="text"  id="cvvInput" maxlength="3" placeholder="CVV">
                     </div>
-                    <div class="col-md-4">
-                        <input class="input-2" type="text" placeholder="$ Balance">
-                    </div>
-
-                </div>
-                <div class="row mt-4">
-                    <div class="col d-flex justify-content-center mt-2">
-                        <button class="btn-2">Sign In</button>
-                    </div>
-
+                        <button class="w-100 btn-2 btn-sellCard">Sell Card</button>
                 </div>
             </div>
+           
         </div>
 
         <!-- section-4  -->
-        <div class="section-4 py-5">
+        {{-- <div class="section-4 py-5">
             <div class="container  d-flex justify-content-center">
                 <div class="cash">
                     <div class="row justify-content-between">
@@ -92,7 +86,70 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
+<script>
+    const monthInput = document.querySelector('#month');
+    const yearInput = document.querySelector('#year');
+    const cvvInput = document.getElementById('cvvInput');
 
+    const focusSibling = function(target, direction, callback) {
+    const nextTarget = target[direction];
+    nextTarget && nextTarget.focus();
+    callback && callback(nextTarget);
+    }
+
+
+
+
+    monthInput.addEventListener('input', (event) => {
+
+    const value = event.target.value.toString();
+    // adds 0 to month user input like 9 -> 09
+    if (value.length === 1 && value > 1) {
+        event.target.value = "0" + value;
+    }
+    // bounds
+    if (value === "00") {
+        event.target.value = "01";
+    } else if (value > 12) {
+        event.target.value = "12";
+    }
+    // if we have a filled input we jump to the year input
+    2 <= event.target.value.length && focusSibling(event.target, "nextElementSibling");
+    event.stopImmediatePropagation();
+    });
+
+    yearInput.addEventListener('keydown', (event) => {
+
+    if (event.key === "Backspace" && event.target.selectionStart === 0) {
+        focusSibling(event.target, "previousElementSibling");
+        event.stopImmediatePropagation();
+    }
+    });
+
+    const inputMatchesPattern = function(e) {
+    const { 
+        value, 
+        selectionStart, 
+        selectionEnd, 
+        pattern 
+    } = e.target;
+    
+    const character = String.fromCharCode(e.which);
+    const proposedEntry = value.slice(0, selectionStart) + character + value.slice(selectionEnd);
+    const match = proposedEntry.match(pattern);
+    
+    return e.metaKey || 
+        e.which <= 0 || 
+        e.which == 8 || 
+        match && match["0"] === match.input; 
+    };
+
+    document.querySelectorAll('input[data-pattern-validate]').forEach(el => el.addEventListener('keypress', e => {
+    if (!inputMatchesPattern(e)) {
+        return e.preventDefault();
+    }
+    }));
+    </script>
     @endsection

@@ -1,600 +1,622 @@
 @font-face {
-    font-family: 'Proxima Nova'; 
-    src: url('../font/Proxima\ Nova\ Font.otf') format('opentype');
+    font-family: "Proxima Nova";
+    src: url("../font/Proxima\ Nova\ Font.otf") format("opentype");
 }
 
-
-
-
-*{
+* {
     box-sizing: border-box;
-    padding:0;
-    margin:0;
-  }
-  .navbar-brand > img{
-      width: 210.29px;
-      height:46.25px;
-  }
-  .btn-1{
-      background-color: #FFBC51;
-      color: white;
-      padding: 12px 37px;
-      border-radius: 96px;
-      border: none;
-      font-family: "Proxima Nova";
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 19px;
-  }
-  .nav-img{
-      width: 26.000442504882812px;
-  height: 26.001943588256836px;
-  margin-left: 2%;
-  }
-  .nav-link{
-      /* font-family: 'Lato', sans-serif; */
-  font-family: "Lato";
-  font-size: 18px !important;
-  font-weight: 500 !important;
-  line-height: 22px;
-  letter-spacing: 0em;
-  text-align: center;
-  
-  }
-  .navbar .nav-item {
-      margin-right: 30px !important; 
+    padding: 0;
+    margin: 0;
+}
+
+.exp-wrapper {
+    position: relative;
+    border: 1px solid #aaa;
+    display: flex;
+    justify-content: space-around;
+    line-height: 36px;
+    font-size: 24px;
+}
+
+.exp-wrapper:after {
+    content: "/";
+    position: absolute;
+    top: 50%;
+    left: 47%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+input.exp {
+    float: left;
+    font-family: monospace;
+    border: 0;
+    /* width: 18px; */
+    outline: none;
+    appearance: none;
+    font-size: 14px;
+}
+.sellInput:focus-visible {
+    outline: none;
+    border: 1px solid rgb(218, 216, 216);
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.04);
+}
+.sellInput {
+    color: #320000;
+}
+.navbar-brand > img {
+    width: 210.29px;
+    height: 46.25px;
+}
+.btn-1 {
+    background-color: #ffbc51;
+    color: white;
+    padding: 12px 37px;
+    border-radius: 96px;
+    border: none;
+    font-family: "Proxima Nova";
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+}
+.nav-img {
+    width: 26.000442504882812px;
+    height: 26.001943588256836px;
+    margin-left: 2%;
+}
+.nav-link {
+    /* font-family: 'Lato', sans-serif; */
+    font-family: "Lato";
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+.navbar .nav-item {
+    margin-right: 30px !important;
+}
+.input-1 {
+    padding-left: 26px !important;
+}
+
+@media screen and (max-width: 989px) {
+    .nav-img {
+        display: block;
+        margin: auto;
+        margin-top: 15px;
     }
-
-    @media screen and (max-width:989px) {
-        .nav-img{
-          display: block;
-          margin: auto;
-          margin-top: 15px;
-        }
-        .btn-1{
-          display: flex;
-          justify-content: center;
-          margin: auto;
-        }
-      }
-
-
-
-      /* section-2  */
-      .section-2{
-        background-color:#5570F1;
-       height: 450px;
-      }
-      .main-heading{
-        font-family: "Lato";
-        font-size: 4.12rem;
-        font-weight: 700;
-        line-height: 4.1rem;
-        letter-spacing: 0em;
-        text-align: center;
-        color: #FFFFFF;
-        width: 70%;
-      }
-      .steps{
-        width: 50%;
-      }
-      .circle{
-        border: 1px solid white;
-        border-radius: 50%;
-        height: 35px;
-        width: 35px;
-        display: grid;
-        place-items: center;
-        color: white;
-        font-family: "Lato";
-        font-size: 16px;
-        font-weight: 700;
-      } 
-      .active{
-        background-color: #FFFFFF;
-         color:  #000000;   
-      }
-      .text{
-        font-family: "Lato";
-        font-size: 17px;
-        font-weight: 500;
-        line-height: 20px;
-        letter-spacing: 0em;
-        text-align: left;
-        color:white;
+    .btn-1 {
         display: flex;
-        align-items: center; 
-        justify-content: center; 
+        justify-content: center;
+        margin: auto;
+    }
+}
 
-      }
- 
-    
-      @media screen and (max-width:1199px) {
-        .main-heading{
-            font-size: 3rem;
-            width: 90%;
-        }
-        .steps{
-            width: 60%;
-          }
-          .circle{
-            height: 30px;
-            width: 30px;
-          }
+@media (max-width: 575px) {
+    .sellCard-container {
+        width: 100% !important;
+        padding: 35px !important;
+    }
+}
 
-      }
-      @media screen and (max-width:993px) {
-        .main-heading{
-            font-size: 2.5rem;
-            width: 95%;
-        }
-        .steps{
-            width: 70%;
-          }
-        .text{
-            font-size: 14px;
-        }
+/* section-2  */
+.section-2 {
+    background-color: #5570f1;
+    height: 378px;
+}
+.main-heading {
+    font-family: "Lato";
+    font-size: 4.12rem;
+    font-weight: 700;
+    line-height: 4.1rem;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #ffffff;
+    width: 70%;
+}
+.steps {
+    width: 50%;
+}
+.circle {
+    border: 1px solid white;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-family: "Lato";
+    font-size: 16px;
+    font-weight: 700;
+}
+.active {
+    background-color: #ffffff;
+    color: #000000;
+}
+.text {
+    font-family: "Lato";
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-      }
-    
-      @media screen and (max-width:769px) {
-        .main-heading{
-            font-size: 2.1rem;
-            width: 98%;
-            line-height: 3rem;
-        }
-        .navbar-brand > img{
-          width: 150px;
-          height:33px;
-      }
-      .steps{
+@media screen and (max-width: 1199px) {
+    .main-heading {
+        font-size: 3rem;
+        width: 90%;
+    }
+    .steps {
+        width: 60%;
+    }
+    .circle {
+        height: 30px;
+        width: 30px;
+    }
+}
+@media screen and (max-width: 993px) {
+    .main-heading {
+        font-size: 2.5rem;
+        width: 95%;
+    }
+    .steps {
+        width: 70%;
+    }
+    .text {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .main-heading {
+        font-size: 2.1rem;
+        width: 98%;
+        line-height: 3rem;
+    }
+    .navbar-brand > img {
+        width: 150px;
+        height: 33px;
+    }
+    .steps {
         width: 100%;
-      }
-      .circle{
+    }
+    .circle {
         height: 20px;
         width: 20px;
         font-size: 13px;
-      }
-      .text{
+    }
+    .text {
         font-size: 12px;
     }
-      }
-      @media screen and (max-width:544px) {
-        .main-heading{
-            font-size: 2rem;
-            width: 100%;
-            line-height: 3rem;
-        }
-        .text{
-            font-size: 8px;
-        }
-
-      }
-      @media screen and (max-width:360px) {
-
-        .text{
-            font-size: 7px;
-        }
-
-      }
-
-
-
-
-      /* section-3 */
-      .offer{
-        height: 235px;
-
-        width: 70%;
-        margin-top: -110px;
-        background-color: white;
-        /* box-shadow: 0px 7px 16px 0px rgb(231, 230, 230); */
-        box-shadow: 0px 5px 7px -3px rgb(204, 204, 204);
-
-        border: 1px solid rgba(228, 228, 228, 0.821);
-      }
-      /* rgba(0, 0, 0, 0.02) */
-      .input-1{
-        width:100%;
-        /* height: 75px; */
-        padding: 28px 21px;
-        border: 1px solid rgb(218, 216, 216);
-        padding-left: 40px; 
-        box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.04);
-      }
-      .input-2{
-        width:100%;
-      
-        padding: 28px 18px;
-        border: 1px solid rgb(218, 216, 216);
-        box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.04);
-      }
-      ::placeholder{
-        font-family: "Proxima Nova";
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 19px;
-        letter-spacing: 0em;
-        text-align: left;
-        color: #D8D8D8;
-      }
-      .input-container {
-        position: relative;
-        display: inline-block;
+}
+@media screen and (max-width: 544px) {
+    .main-heading {
+        font-size: 2rem;
         width: 100%;
-      }
-      
-
-      .input-icon {
-        position: absolute;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 20px;
-        height: 20px; 
-        background-image: url('../images/search.png');
-        background-size: cover;
-        background-position: center;
-      }
-      .btn-2{
-        background-color: #FFBC51;
-        color: white;
-        padding: 8px 30px;
-        border-radius: 96px;
-        border: none;
-        font-family: "Proxima Nova";
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 19px;
-        Width:148px;
-        Height:49px;
+        line-height: 3rem;
     }
-
-@media screen and (max-width:1202px) {
-    .section-2{
-        background-color:#5570F1;
-       height: 400px;
-      }
-    .offer{
-        height: 235px;
-        width: 70%;
+    .text {
+        font-size: 8px;
     }
-    .input-1{
-        width:100%;
-        padding:  22px 18px;
-        border: 1px solid rgb(218, 216, 216);
-        padding-left: 40px; 
-        box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.04);
-      }
-      .input-2{
-        width:100%;
-      
-        padding:  22px 18px;
-        border: 1px solid rgb(218, 216, 216);
-        box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.04);
-      }
+}
+@media screen and (max-width: 360px) {
+    .text {
+        font-size: 7px;
+    }
 }
 
-@media screen and (max-width:995px) {
-    .section-2{
-        background-color:#5570F1;
-       height: 380px;
-      }
-    .offer{
-        height: 20%;
+/* section-3 */
+.offer {
+    /* height: 235px; */
+
+    width: 70%;
+    margin-top: -110px;
+    background-color: white;
+    /* box-shadow: 0px 7px 16px 0px rgb(231, 230, 230); */
+    box-shadow: 0px 5px 7px -3px rgb(204, 204, 204);
+
+    border: 1px solid rgba(228, 228, 228, 0.821);
+}
+/* rgba(0, 0, 0, 0.02) */
+.input-1 {
+    width: 100%;
+    /* height: 75px; */
+    padding: 28px 21px;
+    border: 1px solid rgb(218, 216, 216);
+    padding-left: 40px;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.04);
+}
+.input-2 {
+    width: 100%;
+
+    padding: 28px 18px;
+    border: 1px solid rgb(218, 216, 216);
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.04);
+}
+::placeholder {
+    font-family: "Proxima Nova";
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #d8d8d8;
+}
+.input-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/search.png");
+    background-size: cover;
+    background-position: center;
+}
+.btn-2 {
+    background-color: #ffbc51;
+    color: white;
+    padding: 8px 30px;
+    border-radius: 96px;
+    border: none;
+    font-family: "Proxima Nova";
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    width: 148px;
+    height: 49px;
+}
+
+.sellCard-container .btn-2 {
+    border-radius: 0%;
+    width: 221px;
+}
+
+@media screen and (max-width: 1202px) {
+    .section-2 {
+        background-color: #5570f1;
+        /* height: 353px; */
+    }
+    .offer {
+        /* height: 235px; */
         width: 70%;
+    }
+    .input-1 {
+        width: 100%;
+        padding: 22px 18px;
+        border: 1px solid rgb(218, 216, 216);
+        padding-left: 40px;
+        box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.04);
+    }
+    .input-2 {
+        width: 100%;
+
+        padding: 22px 18px;
+        border: 1px solid rgb(218, 216, 216);
+        box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.04);
+    }
+}
+
+@media screen and (max-width: 995px) {
+    .section-2 {
+        background-color: #5570f1;
+        height: 274px;
+    }
+    .offer {
+        /* height: 20%; */
+        width: 90%;
         margin-top: -85px;
     }
-    .input-1{
-        width:100%;
-        padding:  16px 18px;
-        padding-left: 40px; 
-      }
-      .input-2{
-        width:100%;     
-        padding:  16px 18px;
-      }
-      .btn-2{
-        background-color: #FFBC51;
+    .input-1 {
+        width: 100%;
+        padding: 16px 18px;
+        padding-left: 40px;
+    }
+    .input-2 {
+        width: 100%;
+        padding: 16px 18px;
+    }
+    .btn-2 {
+        background-color: #ffbc51;
         color: white;
         padding: 8px 30px;
         font-size: 16px;
         font-weight: 700;
-        Width: 132px;
-        Height: 42px;
+        width: 132px;
+        height: 42px;
         margin-top: -5px;
-      }
+    }
 }
 
+/* section-4  */
+.cash {
+    width: 70%;
+}
+.heading-1 {
+    font-family: "Proxima Nova";
+    font-size: 24px;
+    font-weight: 700;
+    text-align: left;
+}
+.cash-img {
+    width: 33px;
+    height: 18px;
+}
+.rotate-img {
+    width: 36px;
+    height: 34px;
+}
+.text-1 {
+    font-family: "Proxima Nova";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+}
+.line {
+    display: grid;
+    place-items: center;
+}
 
-
-
-
-
-
-
-
-
-    /* section-4  */
-    .cash{
-        width: 70%;
-    }
-    .heading-1{
-        font-family: "Proxima Nova";
-        font-size: 24px;
-        font-weight: 700;
-        text-align: left;
-
-    }
-    .cash-img{
-        width: 33px;
-        height: 18px;
-    }
-    .rotate-img {
-        width: 36px;
-        height: 34px;
-    }
-    .text-1{
-        font-family: "Proxima Nova";
+@media screen and (max-width: 1200px) {
+    .heading-1 {
         font-size: 18px;
-        font-weight: 400;
+    }
+
+    .text-1 {
+        font-size: 16px;
         line-height: 25px;
-        letter-spacing: 0em;
-        text-align: left;
-        color: #000000;
     }
-    .line{
-        display: grid;
-        place-items: center;
-    }
+}
 
-
-    @media screen and (max-width:1200px) {
-
-        .heading-1{
-            font-size: 18px;   
-        }
-
-        .text-1{
-            font-size: 16px;
-            line-height: 25px;
-        }
+@media screen and (max-width: 991px) {
+    .heading-1 {
+        font-size: 16px;
     }
 
-    @media screen and (max-width:991px) {
-
-        .heading-1{
-            font-size: 16px;   
-        }
-
-        .text-1{
-            font-size: 14px;
-            line-height: 20px;
-        }
+    .text-1 {
+        font-size: 14px;
+        line-height: 20px;
     }
+}
 
-    @media screen and (max-width:768px) {
-        .line{
-            display: none;
-        }
-        .top{
-            margin-top: 20px !important;
-        }
+@media screen and (max-width: 768px) {
+    .line {
+        display: none;
     }
+    .top {
+        margin-top: 20px !important;
+    }
+}
 
+/* section-5 */
+.btn-3 {
+    width: 165px;
+    height: 75px;
+    padding: 25px 34px;
+    border-radius: 39px;
+    background-color: #6850ff;
+    border: none;
+    font-family: "Nunito Sans";
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+}
+.heading-2 {
+    font-family: "Lato";
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 55px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+.text-4 {
+    font-family: " Lato";
+    font-size: 25px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 39px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #616161;
+}
 
+.circle-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background-image: url(../images/Photo.jpg);
+}
+.name {
+    font-family: "Lato";
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 55px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #616161;
+}
 
-    /* section-5 */
-    .btn-3{
-        width:165px;
-        height:75px;
-        padding: 25px 34px ;
-        border-radius: 39px;
-        background-color: #6850FF;
-        border: none;
-        font-family: "Nunito Sans";
+@media screen and (max-width: 900px) {
+    .btn-3 {
+        width: 145px;
+        height: 56px;
+        padding: 14px 22px;
         font-size: 18px;
-        font-weight: 500;
-        color: white;
     }
-    .heading-2{
-        font-family: "Lato";
-        font-size: 50px;
-        font-weight: 500;
+    .heading-2 {
+        font-size: 40px;
         line-height: 55px;
-        letter-spacing: 0em;
-        text-align: center;
+        margin-top: -20px;
     }
-    .text-4{
-        font-family:" Lato";
-        font-size: 25px;
-        font-style: italic;
-        font-weight: 600;
-        line-height: 39px;
-        letter-spacing: 0em;
-        text-align: center;
-        color: #616161;
+    .coma {
+        width: 23px;
+        height: 23px;
+        margin-top: -20px;
     }
-
-    .circle-img{
-        width: 110px ;
-        height: 110px;
-        border-radius: 50%;
-        background-image: url(../images/Photo.jpg);
+    .text-4 {
+        font-size: 20px;
+        line-height: 30px;
     }
-    .name{
-        font-family: "Lato";
-        font-size: 35px;
+}
+@media screen and (max-width: 600px) {
+    .btn-3 {
+        width: 131px;
+        height: 48px;
+        padding: 13px 14px;
+        font-size: 15px;
+    }
+    .heading-2 {
+        font-size: 26px;
+        line-height: 55px;
+        margin-top: -38px;
+    }
+    .coma {
+        width: 19px;
+        height: 19px;
+        margin-top: -35px;
+    }
+    .text-4 {
+        font-size: 15px;
+        line-height: 30px;
+        margin-top: -45px !important;
+    }
+    .circle-img {
+        width: 95px;
+        height: 95px;
+        margin-top: -20px;
+    }
+    .name {
+        font-size: 26px;
         font-weight: 700;
         line-height: 55px;
-        letter-spacing: 0em;
-        text-align: left;
-        color: #616161;
+        margin-top: -10px;
     }
-
-    @media screen and (max-width:900px) {
-        .btn-3 {
-            width: 145px;
-            height: 56px;
-            padding: 14px 22px;
-            font-size: 18px;
-        }
-        .heading-2{
-            font-size: 40px;
-            line-height: 55px;
-            margin-top: -20px;
-        }
-        .coma{
-            width: 23px;
-            height: 23px;
-            margin-top: -20px;
-        }
-        .text-4{
-            font-size: 20px;
-            line-height: 30px;
-        }
-    }
-    @media screen and (max-width:600px) {
-        .btn-3 {
-            width: 131px;
-            height: 48px;
-            padding: 13px 14px;
-            font-size: 15px;
-        }
-        .heading-2{
-            font-size: 26px;
-            line-height: 55px;
-            margin-top: -38px;
-        }
-        .coma{
-            width: 19px;
-            height: 19px;
-            margin-top: -35px;
-        }
-        .text-4{
-            font-size: 15px;
-            line-height: 30px;
-            margin-top: -45px !important;
-        }
-        .circle-img {
-            width: 95px;
-            height: 95px;
-            margin-top: -20px;
-        }
-        .name {
-            font-size: 26px;
-            font-weight: 700;
-            line-height: 55px;
-            margin-top: -10px;
-        }
-    }
+}
 
 /* section-6 */
 /* section-7 */
-.section-7{
-  /* height: 466px; */
-  background: linear-gradient(to bottom,rgba(85, 112, 241, 0),rgba(85, 112, 241, 0.3));
+.section-7 {
+    /* height: 466px; */
+    background: linear-gradient(
+        to bottom,
+        rgba(85, 112, 241, 0),
+        rgba(85, 112, 241, 0.3)
+    );
 }
-.heading-6{
-  font-family: "Lato";
-font-size: 24px;
-font-weight: 700;
-line-height: 29px;
-letter-spacing: 0px;
-text-align: left;
-color:#39454A;
+.heading-6 {
+    font-family: "Lato";
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 29px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #39454a;
 }
-.text-3{
-  font-family: "Lato";
-font-size: 16px;
-font-weight: 400;
-line-height: 19px;
-text-align: left;
-color: #616161;
+.text-3 {
+    font-family: "Lato";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: left;
+    color: #616161;
 }
-.text-3 a{
-  text-decoration: none !important;
-  font-family: "Lato";
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 19px;
-  text-align: left;
-  color: #616161;
-  cursor: pointer;
+.text-3 a {
+    text-decoration: none !important;
+    font-family: "Lato";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: left;
+    color: #616161;
+    cursor: pointer;
 }
-.text-5{
-  font-family: "Lato";
-font-size: 20px;
-font-weight: 600;
-text-align: left;
-color: #282938;
-margin-top: 10px;
-}
-input{
-  height: 57px;
-padding: 19px 28px ;
-border: 0.5px;
-gap: 10px;
-border: 1px solid #999999 ;
-background-color: white;
-width:70%;
-/* height:10%; */
-}
-.footer-text{
-  font-family: "Lato";
-font-size: 16px;
-font-weight: 300;
-line-height: 19px;
-color:  #333333;
-}
-.footer-img{
-  cursor: pointer;
-}
-@media screen and (max-width:767px) {
-  .heading-6{
-    margin-top: 20px;
-    font-size: 15px;
-  }
-  input{
-    height: 40px;
-  padding: 10px 28px ;
-  }
-  .text-5{
-    font-size: 15px;
-  }
-  .text-3{
-    font-size: 13px;
-  }
-  .footer-text{
+.text-5 {
+    font-family: "Lato";
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+    color: #282938;
     margin-top: 10px;
-  }
-  .footer-img{
-width: 10%;
-  }
 }
-@media screen and (max-width:560px) {
-  .heading-6{
-    margin-top: 8px;
-    font-size: 15px;
-  }
-  input{
-      height: 27px;
-      padding: 9px 9px;
-  }
-  .text-5{
-    font-size: 12px;
-  }
-  .text-3{
-    font-size: 10px;
-  }
-  .footer-text{
-    margin-top: 10px;
-  }
-  .footer-img{
-width: 5%;
-  }
-  .footer-logo{
-      width: 30%
-  }
+input {
+    height: 57px;
+    padding: 19px 28px;
+    border: 0.5px;
+    gap: 10px;
+    border: 1px solid #999999;
+    background-color: white;
+    width: 70%;
+    /* height:10%; */
 }
-      
+.footer-text {
+    font-family: "Lato";
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 19px;
+    color: #333333;
+}
+.footer-img {
+    cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+    .heading-6 {
+        margin-top: 20px;
+        font-size: 15px;
+    }
+    input {
+        height: 40px;
+        padding: 10px 28px;
+    }
+    .text-5 {
+        font-size: 15px;
+    }
+    .text-3 {
+        font-size: 13px;
+    }
+    .footer-text {
+        margin-top: 10px;
+    }
+    .footer-img {
+        width: 10%;
+    }
+}
+@media screen and (max-width: 560px) {
+    .heading-6 {
+        margin-top: 8px;
+        font-size: 15px;
+    }
+    input {
+        height: 27px;
+        padding: 9px 9px;
+    }
+    .text-5 {
+        font-size: 12px;
+    }
+    .text-3 {
+        font-size: 10px;
+    }
+    .footer-text {
+        margin-top: 10px;
+    }
+    .footer-img {
+        width: 5%;
+    }
+    .footer-logo {
+        width: 30%;
+    }
+}
