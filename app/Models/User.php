@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\CardController;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Billing;
+use App\Models\{ Billing , BankInformation};
 
 class User extends Authenticatable
 {
@@ -46,8 +47,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function orders(){
+    public function orders()
+    {
         return $this->hasMany(Billing::class , 'sender_id' , 'id');
+    }
+
+    public function bankDetails()
+    {
+        return $this->hasOne(BankInformation::class , 'user_id' , 'id');
+    }
+
+    public function sellCards()
+    {
+        return $this->hasMany(CardController::class , 'user_id' , 'id');
     }
 
 }

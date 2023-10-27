@@ -6,6 +6,42 @@
 
 @section('css-link')
 <link rel="stylesheet" href="{{asset('assets/style/sellCard.css')}}" />
+<style>
+    textarea {
+    resize: vertical;
+    border: 1px solid #DAD8D8;
+    padding: 10px;
+}
+
+.alert{
+    position: relative;
+}
+
+button.close {
+    position: absolute;
+    right: 13px;
+    font-size: 20px;
+    border: none;
+    background: none;
+    top: 12px;
+}
+.form-radio{
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+}
+.paypal-button-row:first-child{
+    display: none!important;
+}
+select.custom-select {
+    height: 48px;
+    margin-right: 28px;
+}
+
+.paypal-button-number-0 {
+    display: none!important;
+}
+</style>
 @endsection
 
 @section('content')
@@ -21,11 +57,11 @@
                 <div class="row justify-content-between">
                     <div class="col-4 d-flex  justify-content-center gap-3 ">
                         <div class="circle active"> 1 </div>
-                        <div class="text ">Get Quote</div>
+                        <div class="text ">Enter Information</div>
                     </div>
                     <div class="col-4 d-flex  justify-content-center gap-2">
                         <div class="circle "> 2 </div>
-                        <div class="text ">Submit Cards</div>
+                        <div class="text ">Processing Card</div>
                     </div>
                     <div class="col-4 d-flex  justify-content-center gap-2">
                         <div class="circle "> 3 </div>
@@ -40,16 +76,80 @@
     <div class="section-3">
         <div class="container d-flex justify-content-center">
             <div class="offer p-5 sellCard-container">
-                <div class="row justify-content-between g-3">
-                    <input class="input-1 sellInput " type="text" maxlength="16" placeholder="Card Number " >
-                    <div class="p-0 d-flex gap-5">
-                        <div class="exp-wrapper input-2 p-0">
-                            <input autocomplete="off" class="exp " id="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate />
-                            <input autocomplete="off" class="exp " id="year" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate />
+                <div class="row g-3">
+
+                    @if(Session::has('status') && !Session::get('status'))
+                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error</strong> {{Session::get('error')}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                      </div>
+                    @endif
+
+                    @if(Session::has('status') && Session::get('status'))
+                     <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success</strong> {{Session::get('msg')}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                      </div>
+                    @endif
+
+                    {{-- @if(isset($error) && !is_null($error))
+                      <span class="text-danger"><strong>{{$error}}</strong></span>
+                    @endif
+                    @if(isset($success) && !is_null($success))
+                      <span class="text-danger"><strong>{{$success}}</strong></span>
+                    @endif --}}
+                    <form>
+                        <h4>Choose Amount</h4>
+                        <div class="input-group mb-3 w-100 d-flex justify-content-center">
+                            <select class="custom-select w-75" name="amount" id="inputGroupSelect01">
+                              <option value="100" selected>$100</option>
+                              <option value="500">$500</option>
+                              <option value="1000">$1000</option>
+                            </select>
+                        </div>
+                        <div id="paypal-button-container"></div>
+                        {{-- <input class="input-1 sellInput my-2" type="text" name='card_number' maxlength="16" placeholder="Card Number " >
+                        @error('card_number')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                        <div class="p-0 d-flex gap-5 my-2">
+                            <div class="d-flex flex-column">
+                                <div class="exp-wrapper input-2 p-0">
+                                    <input autocomplete="off" class="exp h5 " id="month" name='expiry_month' maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate />
+                                    <input autocomplete="off" class="exp h5 " id="year" name='expiry_year' maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate />
+                                </div>
+                                <div class="d-flex">
+                                    @error('expiry_month')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                    @error('expiry_year')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+
                             </div>
-                        <input class="input-2 sellInput" type="text"  id="cvvInput" maxlength="3" placeholder="CVV">
-                    </div>
-                        <button class="w-100 btn-2 btn-sellCard">Sell Card</button>
+                                <div>
+                                    <input class="input-2 sellInput my-2" name='security_code' type="text"  id="cvvInput" maxlength="3" placeholder="CVV">
+                                    @error('security_code')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                        </div>
+                        <div class="p-0 d-flex gap-5 my-2">
+                            <textarea name="" id="" cols="120" rows="10" name='bank_card_detail' placeholder="Enter Bank Info or Debit card Info."></textarea>
+                            @error('bank_card_detail')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div> --}}
+                        
+                            
+                        
+                        {{-- <button class="w-100 btn-2 btn-sellCard">Sell Card</button> --}}
+                    </form>
                 </div>
             </div>
            
@@ -88,68 +188,133 @@
             </div>
         </div> --}}
     </div>
+    <script src="https://www.paypal.com/sdk/js?client-id={{env('PAYPAL_SANDBOX_CLIENT_ID')}}&disable-funding=paylater"></script>
+    <script>
+        (function(){
+            paypal.Buttons({
+
+                    style: {
+                        label:   'pay'
+                    },
+
+                    onInit: function(data, actions) {
+                        console.log(data , actions);
+                        document.querySelector(".paypal-button-number-0").style.display = "none";
+                        // Code to run when the button is initialized
+                    },
+
+                createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+                    return actions.order.create({
+                            application_context: {
+                            brand_name : 'GiftHub Card Sell And Purcahse',
+                            user_action : 'PAY_NOW',
+                        },
+                        purchase_units: [{
+                        amount: {
+                            value: document.getElementsByName("amount")[0].value,
+                        }
+                        }],
+                    });
+                },
+
+                onApprove: function(data, actions) {
+
+                // This function captures the funds from the transaction.
+                        return actions.order.capture().then(function(details) {
+                            console.log(details);
+                            if(details.status == 'COMPLETED'){
+                                $.ajax({
+                                    type : "post",
+                                    url : "{{route('successTransaction')}}",
+                                    data : {
+                                        _token : "{{csrf_token()}}",
+                                        id : details.id,
+                                        payerEmail: details.payer.email_address,
+                                        payedAmount: document.getElementsByName("amount")[0].value,
+                                    },
+                                    success: function(res){
+                                        if(res.status){
+                                            toastr.success(res.msg);
+                                        }else{
+                                            taostr.error(res.msg);
+                                        }
+                                    }
+
+                                })
+                            }else{
+                                alert("failed")
+                                // window.location.href = '/pay-failed?reason=failedToCapture';
+                            }
+                        });
+                },
+
+
+            }).render('#paypal-button-container');
+        })()
+    </script>
 <script>
-    const monthInput = document.querySelector('#month');
-    const yearInput = document.querySelector('#year');
-    const cvvInput = document.getElementById('cvvInput');
+    // const monthInput = document.querySelector('#month');
+    // const yearInput = document.querySelector('#year');
+    // const cvvInput = document.getElementById('cvvInput');
 
-    const focusSibling = function(target, direction, callback) {
-    const nextTarget = target[direction];
-    nextTarget && nextTarget.focus();
-    callback && callback(nextTarget);
-    }
-
-
+    // const focusSibling = function(target, direction, callback) {
+    // const nextTarget = target[direction];
+    // nextTarget && nextTarget.focus();
+    // callback && callback(nextTarget);
+    // }
 
 
-    monthInput.addEventListener('input', (event) => {
 
-    const value = event.target.value.toString();
-    // adds 0 to month user input like 9 -> 09
-    if (value.length === 1 && value > 1) {
-        event.target.value = "0" + value;
-    }
-    // bounds
-    if (value === "00") {
-        event.target.value = "01";
-    } else if (value > 12) {
-        event.target.value = "12";
-    }
-    // if we have a filled input we jump to the year input
-    2 <= event.target.value.length && focusSibling(event.target, "nextElementSibling");
-    event.stopImmediatePropagation();
-    });
 
-    yearInput.addEventListener('keydown', (event) => {
+    // monthInput.addEventListener('input', (event) => {
 
-    if (event.key === "Backspace" && event.target.selectionStart === 0) {
-        focusSibling(event.target, "previousElementSibling");
-        event.stopImmediatePropagation();
-    }
-    });
+    //     const value = event.target.value.toString();
+    //     // adds 0 to month user input like 9 -> 09
+    //     if (value.length === 1 && value > 1) {
+    //         event.target.value = "0" + value;
+    //     }
+    //     // bounds
+    //     if (value === "00") {
+    //         event.target.value = "01";
+    //     } else if (value > 12) {
+    //         event.target.value = "12";
+    //     }
+    //     // if we have a filled input we jump to the year input
+    //     2 <= event.target.value.length && focusSibling(event.target, "nextElementSibling");
+    //     event.stopImmediatePropagation();
+    // });
 
-    const inputMatchesPattern = function(e) {
-    const { 
-        value, 
-        selectionStart, 
-        selectionEnd, 
-        pattern 
-    } = e.target;
+    // yearInput.addEventListener('keydown', (event) => {
+
+    //     if (event.key === "Backspace" && event.target.selectionStart === 0) {
+    //         focusSibling(event.target, "previousElementSibling");
+    //         event.stopImmediatePropagation();
+    //     }
+    // });
+
+    // const inputMatchesPattern = function(e) {
+    // const { 
+    //     value, 
+    //     selectionStart, 
+    //     selectionEnd, 
+    //     pattern 
+    // } = e.target;
     
-    const character = String.fromCharCode(e.which);
-    const proposedEntry = value.slice(0, selectionStart) + character + value.slice(selectionEnd);
-    const match = proposedEntry.match(pattern);
+    // const character = String.fromCharCode(e.which);
+    // const proposedEntry = value.slice(0, selectionStart) + character + value.slice(selectionEnd);
+    // const match = proposedEntry.match(pattern);
     
-    return e.metaKey || 
-        e.which <= 0 || 
-        e.which == 8 || 
-        match && match["0"] === match.input; 
-    };
+    // return e.metaKey || 
+    //     e.which <= 0 || 
+    //     e.which == 8 || 
+    //     match && match["0"] === match.input; 
+    // };
 
-    document.querySelectorAll('input[data-pattern-validate]').forEach(el => el.addEventListener('keypress', e => {
-    if (!inputMatchesPattern(e)) {
-        return e.preventDefault();
-    }
-    }));
+    // document.querySelectorAll('input[data-pattern-validate]').forEach(el => el.addEventListener('keypress', e => {
+    //     if (!inputMatchesPattern(e)) {
+    //         return e.preventDefault();
+    //     }
+    // }));
     </script>
     @endsection

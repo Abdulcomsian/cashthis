@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{GiftcardController, HomeController, PasscodeController, UserDashboardController, BillingController};
+use App\Http\Controllers\{BankInformationController, GiftcardController, HomeController, PasscodeController, UserDashboardController, BillingController, CardController};
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Route::group(['middleware' => ['check.passcode']], function () {
     Route::get('condition-of-use', [HomeController::class, 'condition'])->name('useCondition');
     Route::get('contact', [HomeController::class, 'contact'])->name('contact');
     Route::get('privacy-policy', [HomeController::class, 'policy'])->name('policy');
-    Route::get('sell-card', [HomeController::class, 'card'])->name('card');
+    
 });
 
 Route::get('forget-password', [HomeController::class, 'forgetPassword'])->name('forgetPassword');
@@ -44,4 +44,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('success-purchase', [BillingController::class, 'getSuccessPurchase'])->name('successPurchase');
     Route::get('orders', [GiftcardController::class, 'getOrdersPage'])->name('orders');
     Route::post('orders-list', [GiftcardController::class, 'getOrdersList'])->name('ordersList');
+    Route::get('bank-information' , [BankInformationController::class , 'bankInformation'])->name('bankInformation');
+    Route::post('add-bank-information' , [BankInformationController::class , 'addBankInformation'])->name('addBankInformation');
+    // Route::get('sell-card', [CardController::class, 'card'])->name('card');
+    // Route::post('add-sell-card-information', [CardController::class, 'addUserCard'])->name('addUserCard');
+    //paypal route starts here
+    Route::get('sell-card', [CardController::class, 'card'])->name('card');
+    Route::post('add-sell-card-information', [CardController::class, 'addUserCard'])->name('addUserCard');
+    // Route::post('create-paypal-transaction', [CardController::class, 'createPaypalTransaction'])->name('createPaypalTransaction');
+    Route::any('success-transaction' , [CardController::class , 'successTransaction'])->name('successTransaction');
+    //paypal route ends here
+
 });
