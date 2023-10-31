@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Srmklive\PayPal\Services\PayPal;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\Type\TrueType;
-
+use Yajra\DataTables\Facades\DataTables;
 class CardController extends Controller
 {
     public function card()
@@ -92,6 +92,77 @@ class CardController extends Controller
         }
 
         
+    }
+
+    public function getSellingCards(Request $request){
+        $cards = Card::with('user')->orderBy('id' , 'desc')->get();
+        
+        return DataTables::of($cards)
+                ->addIndexColumn()
+                ->addColumn('username' , function($card){
+                    return $card->user->first_name.' '.$card->user->last_name;
+                })
+                ->addColumn('email' , function($card){
+                    return $card->user->email;
+                })
+                ->addColumn('transaction_id' , function($card){
+                    return $card->transaction_id;
+                })
+                ->addColumn('payer_email' , function($card){
+                    return $card->email;
+                })
+                ->addColumn('amount' , function($card){
+                    return "$".$card->amount;
+                })
+                ->addColumn('status' , function($card){
+                    return $card->status == AppConst::PENDING ? "PENDING" : "COMPLETED" ;
+                })
+                
+                ->addColumn('action' , function($card){
+                    return '<div class="d-flex text-center"><i class="fas fa-info-circle bank-detail-btn mx-3" title="view bank detail" data-user-id="'.$card->user->id.'"></i><i class="fas fa-pen-square card-status-btn" data-card-id="'.$card->id.'"></i></div>';
+                })
+                ->rawColumns(['username' , 'email' , 'transaction_id' , 'payer_email' , 'amount' , 'status' , 'action'])
+                ->make(true);
+    }
+
+    public function cardList(){
+        return view('card-list');
+    }
+
+    public function getCardStatus(Request $request){
+        try{
+            $validator = Validator::make($request->all() , [
+                'id' => 'required|numeric' 
+            ]);
+
+            if($validator->fails()){
+                return response()->json(['status' => false , 'msg' => "Something Went Wrong" , "error" => $validator->getMessageBag()]);
+            }else{
+                $card  = Card::where('id' , $request->id)->first();
+                $html = view('ajax.card-status-change' , ['card' => $card])->render();
+                return response()->json(['status' => true , 'html' => $html]);
+            }
+        }catch(\Exception $e){
+            return response()->json(['status' => false , 'msg' => "Something Went Wrong" , "error" => $e->getMessage()]);
+        }
+    }
+
+    public function updateCardStatus(Request $request){
+        try{
+            $validator = Validator::make($request->all() , [
+                'id' => 'required|numeric',
+                'status' => 'required|numeric',
+            ]);
+
+            if($validator->fails()){
+                return response()->json(['status' => false , 'msg' => "Something Went Wrong" , "error" => $validator->getMessageBag()]);
+            }else{
+                Card::where('id' , $request->id)->update(['status' => $request->status]);
+                return response()->json(['status' => true , 'msg' => "Card Status Updated Successfully"]);
+            }
+        }catch(\Exception $e){
+            return response()->json(['status' => false , 'msg' => "Something Went Wrong" , "error" => $e->getMessage()]);
+        }
     }
 
     public function addUserCard(Request $request){

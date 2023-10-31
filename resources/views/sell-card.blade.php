@@ -104,8 +104,8 @@ select.custom-select {
                     @endif --}}
                     <form>
                         <h4>Choose Amount</h4>
-                        <div class="input-group mb-3 w-100 d-flex justify-content-center">
-                            <select class="custom-select w-75" name="amount" id="inputGroupSelect01">
+                        <div class="input-group mb-3 w-100 d-flex justify-content-start">
+                            <select class="custom-select" name="amount" id="inputGroupSelect01" style="width: 92%;">
                               <option value="100" selected>$100</option>
                               <option value="500">$500</option>
                               <option value="1000">$1000</option>

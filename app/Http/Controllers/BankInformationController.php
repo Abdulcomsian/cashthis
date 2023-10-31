@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BankInformation;
+use Illuminate\Support\Facades\Validator;
 
 class BankInformationController extends Controller
 {
@@ -37,6 +38,27 @@ class BankInformationController extends Controller
             return redirect()->back()->with(['status' => false , 'error' => $e->getMessage() ]);
         }
 
+    }
+
+    public function getBankDetails(Request $request){
+        try{
+
+            $validator = Validator::make($request->all() , [
+                'id' => 'required|numeric'
+            ]);
+
+            if($validator->fails()){
+                return response()->json(['status' => false , 'msg' => 'Something Went Wrong' , 'error' => $validator->getMessageBag()  ]);
+            }
+
+
+            $detail = BankInformation::where('user_id' , $request->id)->first();
+            $html = view('ajax.bank-detail',['detail' => $detail])->render();
+            return response()->json(['status' => true , 'html' => $html]);
+
+        }catch(\Exception $e){
+            return response()->json(['status' => false , 'msg' => 'Something Went Wrong' , 'error' => $e->getMessage()  ]);
+        }
     }
 
 }

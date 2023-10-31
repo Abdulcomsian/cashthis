@@ -56,3 +56,12 @@ Route::group(['middleware' => ['auth']], function () {
     //paypal route ends here
 
 });
+
+
+Route::group(['middleware' => ['auth' , 'check.admin']] , function(){
+    Route::get('card-list' , [CardController::class , 'cardList'])->name('cardList');
+    Route::post('selling-card-list' , [CardController::class , 'getSellingCards'])->name('sellingCards');
+    Route::post('get-user-bank-details' , [BankInformationController::class , 'getBankDetails'])->name('bankDetails');
+    Route::post('get-card-status' , [CardController::class ,'getCardStatus'])->name('getCardStatus');
+    Route::post("update-card-status" , [CardController::class , 'updateCardStatus'])->name('updateCardStatus');
+});
