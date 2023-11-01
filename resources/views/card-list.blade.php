@@ -18,6 +18,8 @@
     position: relative;
 }
 
+
+
 button.close {
     position: absolute;
     right: 13px;
@@ -35,9 +37,46 @@ button.close {
 .fas:hover{
     color: rgb(0, 140, 255);
 }
+select{
+    border: 1px solid dodgerblue;
+    border-radius: 5px
+}
 .form-check-input{
     display: inline-block;
     padding: 2px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    background: rgb(73, 115, 158);
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid transparent;
+    padding: 3px 16px;
+    /* box-shadow: 0 0 5px dodgerblue; */
+}
+.dataTables_wrapper .dataTables_info{
+    padding-top: 14px;
+    color: #4455;
+}
+table.dataTable.no-footer{
+    border-bottom: 0px solid #4455;
+}
+table.dataTable thead th{
+    border-bottom: 1px solid #4455
+}
+table.dataTable .dataTables_empty{
+    padding: 35px 10px;
+    color: gray;
+}
+#selling-cards{
+    padding-top: 40px;
+}
+#selling-cards_filter input[type="search"]{
+    padding: 12px;
+    border-radius:5px;
+    border: 1px solid dodgerblue;
+}
+#selling-cards_filter input[type="search"]:focus{
+    outline: none
 }
 </style>
 @endsection
@@ -89,23 +128,24 @@ button.close {
     <!-- section-3  -->
     <div class="section-3">
         <div class="container d-flex justify-content-center">
-            <div class="offer p-5 sellCard-container">
+            <div class="offer p-5 pb-3 sellCard-container">
                 <div class="card-list">
-                    <table id="selling-cards" class="table">
-                        <thead>
-                            <th>Sno</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Transaction Id</th>
-                            <th>Payer Email</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
+                    <div style="overflow-x: auto">
+                        <table id="selling-cards" class="table w-100" >
+                            <thead>
+                                <th>Sno</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Transaction Id</th>
+                                <th>Payer Email</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,6 +234,7 @@ button.close {
             $("#selling-cards").DataTable({
                     processing: true,
                     serverSide: true,
+                    responsive: true,
                     pagingType: 'full_numbers',
                     "bDestroy": true,
                     ajax : {
