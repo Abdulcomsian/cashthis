@@ -8,6 +8,10 @@
     .dropdown-toggle::after {
         display: none;
     }
+
+    input[type="search"] {
+        height: 20px;
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,6 +37,12 @@
                 <li class="nav-item m-lg-auto">
                     <a class="nav-link " href="{{ route('giftCardPage') }}">Gift Cards</a>
                 </li>
+
+                @if(!auth()->check() || auth()->user()->type == \AppConst::USER)
+                <li class="nav-item m-lg-auto">
+                    <a class="nav-link " href="{{ route('card') }}">Sell Card</a>
+                </li>
+                @endif
                 @if (!auth()->user())
                     <li class="nav-item m-lg-auto d-flex align-items-center gap-2">
                         <a href="{{ route('login') }}" class="btn-1">Sign in</a>
@@ -54,9 +64,13 @@
                         </div>
                         @if (auth()->user())
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{ route('userDashboard') }}"
-                                    role="button">Dashboard</a>
-                                <a class="dropdown-item" href="{{ route('orders') }}" role="button">Orders</a>
+                                @if(auth()->check() && auth()->user()->type == \AppConst::USER)
+                                    <a class="dropdown-item" href="{{ route('userDashboard') }}" role="button">Dashboard</a>
+                                    <a class="dropdown-item" href="{{ route('orders') }}" role="button">Orders</a>
+                                @endif
+                                @if(auth()->check() && auth()->user()->type == AppConst::ADMIN)
+                                    <a class="dropdown-item" href="{{ route('cardList') }}" role="button">Card List</a>
+                                @endif
                                 <button class="dropdown-item logout-btn">Logout</button>
                             </div>
                         @endif

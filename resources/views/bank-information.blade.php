@@ -43,6 +43,7 @@ button.close {
     <div class="section-3">
         <div class="container d-flex justify-content-center">
             <div class="offer p-5 sellCard-container">
+                <div class="text-center text-primary"><strong>Please Enter Your Bank Information Before Selling Card</strong></div>
                 <div class="row justify-content-between g-3">
                     @if(Session::has('status') && !Session::get('status'))
                      <div class="alert alert-danger alert-dismissible fade show" role="alert">

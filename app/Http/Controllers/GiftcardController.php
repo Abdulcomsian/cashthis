@@ -102,7 +102,6 @@ class GiftcardController extends Controller
     }
 
     public function getOrdersList(){
-
         $user = User::with('orders')->where('id' , auth()->user()->id)->first();
         $orders = $user->orders;
 
