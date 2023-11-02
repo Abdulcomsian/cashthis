@@ -12,7 +12,7 @@
         referrerpolicy="no-referrer" />
     <style>
         button.btn.btn-outline-secondary.filter-card {
-            border-radius: 1px;
+            border-radius: 6px;
             background: #5570F1;
             color: white;
             border: 1px solid #5570F1;
@@ -21,7 +21,10 @@
         div#pagination-container {
             display: flex;
             justify-content: center;
-            padding: 1%
+            padding: 3%
+        }
+        h4.text-center.py-2{
+        font-size: 16px;
         }
 
         /* div#card-container {
@@ -81,7 +84,13 @@
 
         }
         #inputGroupSelect04{
-            text-align: center
+            text-align: center;
+            border-radius: 5px !important;
+            border: 1px solid lightslategray !important;
+            min-width: 133px;
+        }
+        #inputGroupSelect04:focus{
+            border: 1px solid dodgerblue !important;
         }
         .card-section .loading{
             align-self: center;
@@ -101,8 +110,18 @@
     padding: 20px;
     text-align: center;
 }
+.main-card:hover{
+    box-shadow: 0 0 12px -2px lightslategray;
+}
+
 
 /* Media queries for smaller screens */
+@media (max-width: 1198px) { /* Tablets and smaller */
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns for tablets */
+    }
+}
+
 @media (max-width: 1023px) { /* Tablets and smaller */
     .grid-container {
         grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns for tablets */
@@ -112,6 +131,14 @@
 @media (max-width: 767px) { /* Mobile devices */
     .grid-container {
         grid-template-columns: repeat(2, 1fr); /* Adjust the number of columns for mobile devices */
+    }
+}
+@media (max-width: 575px) { /* Tablets and smaller */
+    .grid-container {
+        grid-template-columns: repeat(1, 1fr); /* Adjust the number of columns for tablets */
+    }
+    h4.text-center.py-2{
+        font-size: 16px;
     }
 }
 
@@ -246,7 +273,7 @@
                                         <img src="${card.logo_url}" alt="${card.product_id}" /></div>`;
                             let brand = card.brand !== null ? card.brand : "";
                             cardHtml +=  `<div class="h-100 d-flex flex-column justify-content-between"><h4 class="text-center py-2">${brand} ${card.country_iso}</h4>
-                                            <div class="d-flex justify-content-center p-3">
+                                            <div class="d-flex justify-content-center py-2 pb-4">
                                                 <a href="{{ url('gift-card-detail') }}/${card.product_id}" class="btn btn-success view-card-detail" data-product-id="${card.product_id}">Buy Now</a>
                                             </div></div>
                                     </div>

@@ -61,6 +61,7 @@
         function loadTable(table , url, columns){
             $(table).DataTable({
                 processing: true,
+                responsive:true,
                 serverSide: true,
                 pagingType: 'full_numbers',
                 "bDestroy": true,
