@@ -139,7 +139,7 @@ table.dataTable .dataTables_empty{
                                 <th>Transaction Id</th>
                                 <th>Payer Email</th>
                                 <th>Amount</th>
-                                <th>Status</th>
+                                <th>Payment Status</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>

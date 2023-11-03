@@ -66,6 +66,8 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 @if(auth()->check() && auth()->user()->type == \AppConst::USER)
                                     <a class="dropdown-item" href="{{ route('userDashboard') }}" role="button">Dashboard</a>
+                                @endif
+                                @if(auth()->check())
                                     <a class="dropdown-item" href="{{ route('orders') }}" role="button">Orders</a>
                                 @endif
                                 @if(auth()->check() && auth()->user()->type == AppConst::ADMIN)

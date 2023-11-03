@@ -10,7 +10,7 @@
           <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDisabled" id="card-status-completed" @if($card->status == \AppConst::COMPLETED) checked @endif>
             <label class="form-check-label" for="card-status-completed">
-              Completed
+              Payment Sent
             </label>
           </div>
         <div>

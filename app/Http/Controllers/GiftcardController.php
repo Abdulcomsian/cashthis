@@ -6,7 +6,7 @@ use App\Http\AppConst;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Http\Traits\ReloadyApi;
-use App\Models\{ Country , User};
+use App\Models\{Billing, Country , User};
 use Yajra\DataTables\Facades\DataTables;
 class GiftcardController extends Controller
 {
@@ -102,8 +102,13 @@ class GiftcardController extends Controller
     }
 
     public function getOrdersList(){
-        $user = User::with('orders')->where('id' , auth()->user()->id)->first();
-        $orders = $user->orders;
+        
+        if(auth()->user()->type == AppConst::USER){
+            $user = User::with('orders')->where('id' , auth()->user()->id)->first();
+            $orders = $user->orders;
+        }else{
+            $orders = Billing::orderBy('id' , 'desc')->get();
+        }
 
         return DataTables::of($orders)
                         ->addIndexColumn()
