@@ -15,24 +15,35 @@ class BankInformationController extends Controller
 
     public function addBankInformation(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make( $request->all() , [
             'bank_name' => 'required|string',
             'routing_number' => 'required|string',
             'account_number' => 'required|string',
             'account_name' => 'required|string',
         ]);
+
+        if($validator->fails()){
+            if($request->ajax()){
+                return response()->json(['status' => false , 'msg' => 'Something Went Wrong' , 'error' => $validator->getMessageBag()]);
+            }else{
+                return redirect()->back()->with(['status' => false , 'msg' => 'Something Went Wrong' , 'error' => $validator->getMessageBag() ]);
+            }
+        }
+
+        // dd($request->getRequestUri());
         try{
             
     
-            BankInformation::create([
-                'name' => $request->bank_name,
-                'routing_number' => $request->routing_number,
-                'account_number' => $request->account_number,
-                'account_name' => $request->account_name,
-                'user_id' => auth()->user()->id,
-            ]);
+            BankInformation::updateOrCreate(
+                ['user_id' => auth()->user()->id],
+                [ 'name' => $request->bank_name, 'routing_number' => $request->routing_number, 'account_number' => $request->account_number, 'account_name' => $request->account_name, 'user_id' => auth()->user()->id,]
+            );
 
-            return redirect()->route('card');
+            if($request->ajax()){
+                return response()->json(['status' => true , "msg" => 'Bank Information Updated Successfully']);
+            }else{
+                return redirect()->route('card');
+            }
 
         }catch(\Exception $e){
             return redirect()->back()->with(['status' => false , 'error' => $e->getMessage() ]);

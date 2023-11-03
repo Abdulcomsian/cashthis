@@ -10,6 +10,7 @@ use Srmklive\PayPal\Services\PayPal;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\Type\TrueType;
 use Yajra\DataTables\Facades\DataTables;
+
 class CardController extends Controller
 {
     public function card()
@@ -165,63 +166,31 @@ class CardController extends Controller
         }
     }
 
-    public function addUserCard(Request $request){
+    public function getSoldCard(){
+        try{
+            $cards = Card::where('id' , auth()->user()->id)->orderBy('id','desc')->get();
+            return DataTables::of($cards)
+                            ->addIndexColumn()
+                            ->addColumn( 'transaction_id' , function($card){
+                                return $card->transaction_id;
+                            })
+                            ->addColumn('email', function($card){
+                                return $card->email;
+                            })
+                            ->addColumn('amount', function($card){
+                                return "$".$card->amount;
+                            })
+                            ->addColumn('status', function($card){
+                                return $card->status == AppConst::PENDING ? 'PENDING' : 'COMPLETED' ;
+                            })
+                            ->rawColumns(['transaction_id' , 'email' , 'amount' , 'status'])
+                            ->make(true);
 
-        // $request->validate([
-        //     'card_number' => 'required|string',
-        //     'expiry_month' => 'required|min:1',
-        //     'expiry_year' => 'required',
-        //     'security_code' => 'required|string',
-        //     'bank_card_detail' => 'string',
-        // ]);
-
-
-        // try{
-    
-        //     $currentDate = Carbon::now()->addDay(30);
-        //     $givenDate = Carbon::create((int)"20".$request->expiry_year, (int)$request->expiry_month,  1, 0, 0, 0);
-        //     $check = $givenDate->greaterThanOrEqualTo($currentDate);
-        //     if($check)
-        //     {
-        //         Card::create([
-        //             'user_id' => auth()->user()->id,
-        //             'card_number' => $request->card_number,
-        //             'expiry_month' => $request->expiry_month,
-        //             'expiry_year' => $request->expiry_year,
-        //             'security_code' => $request->security_code,
-        //             'bank_card_detail' => $request->detail,
-        //         ]);
-
-        //         return redirect()->back()->with(['status' => true  , 'msg' => 'Thanks For Adding Card, Your Card Is Processing We Contact You Soon']);
-        //     }else{
-        //         return redirect()->back()->with(['status' => false  , 'error' => 'Card Expiration Date Must Be Greater Then At Least One Month']);
-        //     }
-
-
-        // }catch(\Exception $e){
-        //     return redirect()->back()->with(['status' => false , 'error' => $e->getMessage() ]);
-        // }
+        }catch(\Exception $e){
+            return response()->json(['status' => false , 'msg' => "Something Went Wrong" , "error" => $e->getMessage()]);
+        }
     }
 
-    // public function successTransaction(Request $request){
-    //     $provider = new PayPal;
-    //     $provider->setApiCredentials(config('paypal'));
-    //     $provider->getAccessToken();
-    //     $response = $provider->capturePaymentOrder($request['token']);
-    //     if (isset($response['status']) && $response['status'] == 'COMPLETED') {
-    //         return redirect()
-    //             ->route('sell-card')
-    //             ->with(['success' =>  'Transaction complete.']);
-    //     } else {
-    //         return redirect()
-    //             ->route('sell-card')
-    //             ->with(['error'=> $response['message'] ?? 'Something went wrong.']);
-    //     }
-    // }
-
-    // public function cancelTransaction(Request $request){
-    //     return redirect()->route('createTransaction')->with('error', $response['message'] ?? 'You have canceled the transaction.');
-    // }
 }
 
 

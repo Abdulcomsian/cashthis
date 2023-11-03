@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('orders-list', [GiftcardController::class, 'getOrdersList'])->name('ordersList');
     Route::get('bank-information' , [BankInformationController::class , 'bankInformation'])->name('bankInformation');
     Route::post('add-bank-information' , [BankInformationController::class , 'addBankInformation'])->name('addBankInformation');
+    Route::post('update-user-profile', [UserDashboardController::class , 'updateUserProfile'])->name('updateUserProfile');
+    Route::post('update-user-password', [UserDashboardController::class , 'updateUserPassword'])->name('updateUserPassword');
     // Route::get('sell-card', [CardController::class, 'card'])->name('card');
     // Route::post('add-sell-card-information', [CardController::class, 'addUserCard'])->name('addUserCard');
     //paypal route starts here
@@ -53,7 +55,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('add-sell-card-information', [CardController::class, 'addUserCard'])->name('addUserCard');
     // Route::post('create-paypal-transaction', [CardController::class, 'createPaypalTransaction'])->name('createPaypalTransaction');
     Route::any('success-transaction' , [CardController::class , 'successTransaction'])->name('successTransaction');
+    Route::post('user-sold-card' , [CardController::class , 'getSoldCard'])->name('getSoldCard');
     //paypal route ends here
+    Route::get('get-profile-detail' , [UserDashboardController::class ,'getProfileDetail'])->name('getProfileDetail');
 
 });
 

@@ -15,7 +15,8 @@
 @section('content')
 <div class="container my-5">
     <div class="row my-5">
-        <table class="table table-striped">
+        <h3>Card Orders</h3>
+        <table class="order-table table-striped">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -36,7 +37,34 @@
           
     </div>
 </div>
+
+@if(auth()->user()->type == AppConst::USER)
+<div class="container my-5">
+    <div class="row my-5">
+        <h3>Sold Cards</h3>
+        <table class="card-table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Transaction Id</th>
+                <th scope="col">Transaction Email</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Payment Status</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+          
+    </div>
+</div>
+@endif
+
+
 @endsection
+
+
 
 @section('page-script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -55,7 +83,21 @@
                             { data: 'purchaseDate', name: 'purchaseDate' },
                        ];
 
-         loadTable( ".table" ,  url , columns)
+         loadTable( ".order-table" ,  url , columns)
+
+         let cardTable = document.querySelector(".card-table");
+         if(cardTable){
+            url = '{{route("getSoldCard")}}';
+            columns = [
+                            { data: 'DT_RowIndex', 'orderable': false, 'searchable': false },
+                            { data: 'transaction_id', name: 'transaction_id' },
+                            { data: 'email', name: 'email' },
+                            { data: 'amount', name: 'amount' },
+                            { data: 'status', name: 'status' },
+                       ];
+            loadTable(".card-table" , url , columns);
+         }
+
         })()
 
         function loadTable(table , url, columns){
