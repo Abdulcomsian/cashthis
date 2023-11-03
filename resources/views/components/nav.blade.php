@@ -38,11 +38,9 @@
                     <a class="nav-link " href="{{ route('giftCardPage') }}">Gift Cards</a>
                 </li>
 
-                @if(!auth()->check() || auth()->user()->type == \AppConst::USER)
                 <li class="nav-item m-lg-auto">
                     <a class="nav-link " href="{{ route('card') }}">Sell Card</a>
                 </li>
-                @endif
                 @if (!auth()->user())
                     <li class="nav-item m-lg-auto d-flex align-items-center gap-2">
                         <a href="{{ route('login') }}" class="btn-1">Sign in</a>
