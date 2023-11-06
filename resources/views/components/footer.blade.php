@@ -11,20 +11,20 @@
             </div>
             <div class="col-md-2" style="display: flex; flex-direction: column">
                 <a class="heading-6">About</a>
-                <a class="text-3 mt-3">Our Story</a>
+                {{-- <a class="text-3 mt-3">Our Story</a> --}}
                 <a href="{{route('useCondition')}}" class="text-3 mt-3">How It Works</a>
             </div>
             <div class="col-md-2" style="display: flex; flex-direction: column">
                 <a class="heading-6">Support</a>
-                <a class="text-3 mt-3">FAQ</a>
+                {{-- <a class="text-3 mt-3">FAQ</a> --}}
                 <a href="{{route('gurantee')}}" class="text-3 mt-3">Guarantee </a>
                 <a href="{{route('contact')}}" class="text-3 mt-3">Contact US</a>
             </div>
-            <div class="col-md-2" style="display: flex; flex-direction: column">
+            {{-- <div class="col-md-2" style="display: flex; flex-direction: column">
                 <a class="heading-6">Account</a>
                 <a class="text-3 mt-3">Login</a>
                 <a class="text-3 mt-3">Refer a Friend</a>
-            </div>
+            </div> --}}
         </div>
 
         <div class="row mt-md-5 justify-content-between g-2">
