@@ -110,7 +110,8 @@
                 <div>
                     <span class="heading">Amount:</span>
                     <span>
-                        {{ $cardDetail->denominationType == 'FIXED' ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minSenderDenomination[0] }}
+                        {{-- @dd($cardDetail) --}}
+                        {{ $cardDetail->denominationType == 'FIXED' ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minRecipientDenomination }}
                         {{ $cardDetail->recipientCurrencyCode }}
                     </span>
                 </div>
@@ -130,7 +131,7 @@
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $cardDetail->productId }}">
                         <input type="hidden" name="product_amount"
-                            value="{{ $cardDetail->denominationType == 'FIXED' ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minSenderDenomination[0] }}">
+                            value="{{ $cardDetail->denominationType == 'FIXED' ? $cardDetail->fixedRecipientDenominations[0] : $cardDetail->minRecipientDenomination }}">
                         <input type="hidden" name="product_name" value="{{ $cardDetail->productName }}">
                         <input type="hidden" name="quantity" value="1">
                         <div class="form-group mb-3">
