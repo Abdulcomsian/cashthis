@@ -22,6 +22,7 @@ Route::post('set-passcode', [PasscodeController::class, 'setPasscode'])->name('s
 Route::get('login', [HomeController::class, 'login'])->name('login');
 Route::get('signup', [HomeController::class, 'register'])->name('register');
 Route::get('forget-password', [HomeController::class , 'forgetPassword'])->name('forgetPassword');
+Route::get('aboutUs', [HomeController::class , 'aboutUs'])->name('aboutUs');
 
 Route::group(['middleware' => ['check.passcode']], function () {
     Route::get('home', [HomeController::class, 'home'])->name('home');
