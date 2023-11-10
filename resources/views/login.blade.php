@@ -135,8 +135,8 @@
                             <div class="text-line-2">
                                 <span>
                                     <!-- {{ __('lang.login_form.dont_have_any_account') }} <a href="{{ url('/signup') }}">{{ __('lang.navbar.signup') }}</a> -->
-                                    Don't rembember password?.
-                                    <a href="{{ route('forgetPassword') }}">Forget Password.</a>
+                                    Don't remember password?.
+                                    <a href="{{ route('forgetPassword') }}">Forgot Password?</a>
                                 </span>
                             </div>
                         </div>

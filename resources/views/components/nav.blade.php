@@ -42,7 +42,7 @@
                     <a class="nav-link " href="{{ route('card') }}">Sell Card</a>
                 </li>
                 <li class="nav-item m-lg-auto">
-                    <a class="nav-link" href="{{route('contact')}}">Contact US</a>
+                    <a class="nav-link" href="{{route('contact')}}">Contact us</a>
                 </li>
                 @if (!auth()->user())
                     <li class="nav-item m-lg-auto d-flex align-items-center gap-2">
