@@ -3,16 +3,16 @@
         <div class="row justify-content-between" style="padding-top: 10%;">
             <div class="col-md-5">
                 <img src="{{asset('assets/images/Frame127.png')}}" alt="">
-                <div class="text-4 mt-5">Sign up for our sales and savings emails</div>
+                <!-- <div class="text-4 mt-5">Sign up for our sales and savings emails</div>
                 <div class="email mt-3">
                     <input type="email" placeholder="Your email address..">
                     <img class="ms-3 footer-img" src="{{asset('assets/images/arrow.png')}}" alt="">
-                </div>
+                </div> -->
             </div>
             <div class="col-md-2" style="display: flex; flex-direction: column">
-                <a class="heading-6">About</a>
+                <!-- <a class="heading-6">About</a> -->
                 {{-- <a class="text-3 mt-3">Our Story</a> --}}
-                <a href="{{route('useCondition')}}" class="text-3 mt-3">How It Works</a>
+                <a href="{{route('useCondition')}}" class="heading-6">How It Works</a>
             </div>
             <div class="col-md-2" style="display: flex; flex-direction: column">
                 <a class="heading-6">Support</a>
