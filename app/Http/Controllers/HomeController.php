@@ -10,6 +10,10 @@ class HomeController extends Controller
     {
         return view('index');
     }
+    public function aboutUs()
+    {
+        return view('about');
+    }
 
     public function gurantee()
     {
