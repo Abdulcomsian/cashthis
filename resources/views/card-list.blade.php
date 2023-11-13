@@ -122,13 +122,24 @@ table.dataTable .dataTables_empty{
             <div class="main-heading pt-5 m-auto ">
                 Card List
             </div>
+            
         </div>
     </div>
 
     <!-- section-3  -->
     <div class="section-3">
+        
         <div class="container d-flex justify-content-center">
             <div class="offer p-5 pb-3 sellCard-container">
+                <div class="d-flex justify-content-end">
+                    <div class="col-auto">
+                        {{-- <label class="sr-only" for="inlineFormInputGroup">Percentage</label> --}}
+                        <div class="input-group mb-2">
+                          <input type="number" min="0" max="99.99" class="form-control percentage" id="inlineFormInputGroup" value="{{$latestPercentage}}" placeholder="Percentage">
+                          <button class="btn btn-primary update-percentage-btn">Update</button>
+                        </div>
+                      </div>
+                </div>
                 <div class="card-list">
                     <div style="overflow-x: auto">
                         <table id="selling-cards" class="table w-100" >
@@ -139,6 +150,8 @@ table.dataTable .dataTables_empty{
                                 <th>Transaction Id</th>
                                 <th>Payer Email</th>
                                 <th>Amount</th>
+                                <th>Payed Amount</th>
+                                <th>Percentage</th>
                                 <th>Payment Status</th>
                                 <th>Action</th>
                             </thead>
@@ -251,6 +264,8 @@ table.dataTable .dataTables_empty{
                           { data: 'transaction_id', name: 'transaction_id' },
                           { data: 'payer_email', name: 'payer_email' },
                           { data: 'amount', name: 'amount' },
+                          { data: 'payed_amount', name: 'payed_amount' },
+                          { data: 'payed_percentage', name: 'payed_percentage' },
                           { data: 'status', name: 'status' },
                           { data: 'action', name: 'action' },
                       ]
@@ -265,4 +280,39 @@ table.dataTable .dataTables_empty{
 
     @section('page-script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).on("click" , ".update-percentage-btn" , function(e){
+            let element = e.traget;
+            let percentage = document.querySelector(".percentage").value;
+            $.ajax({
+                type : "POST",
+                url : "{{route('updatePercentage')}}",
+                data : {
+                    _token : "{{csrf_token()}}",
+                    percentage : percentage,
+                },
+                success: function(res){
+                    if(res.status){
+                        toastr.success(res.msg);
+                    }else{
+                        toastr.error(res.msg);
+                    }
+                }
+            })
+        })
+
+        // $(document).on("keypress" , ".percentage" , function(e){
+        //     // console.log(e.cancelable)
+        //     // alert("hi there")   
+        //     let value = e.target.value;
+        //     let regex = /^\d{1,2}(\.\d{0,2})?$/
+        //     let response = regex.test(value)
+        //     console.log(response);
+        //     if(response){
+        //         e.preventDefault();
+        //     }
+        // })
+
+        
+    </script>
     @endsection

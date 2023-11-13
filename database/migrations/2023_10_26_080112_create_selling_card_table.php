@@ -16,11 +16,13 @@ class CreateSellingCardTable extends Migration
         Schema::create('selling_card', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('percentage_id');
             $table->string('transaction_id');
             $table->enum('status' , [ 1, 2])->default(1);
             $table->string('email');
             $table->double('amount' , 8 , 2);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('percentage_id')->references('id')->on('selling_percentage')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -103,9 +103,13 @@ select.custom-select {
                       <span class="text-danger"><strong>{{$success}}</strong></span>
                     @endif --}}
                     <form>
-                        <h4>Choose Amount</h4>
+                        <div class="d-flex justify-content-between" style='width : 90%'>
+                            <h4>Choose Amount</h4>
+                            
+                            <span>You will get: <strong class="percentage_amount">${{ number_format( 100 - (($percentage->percentage/100) * 100) , 2 )}}</strong><span>
+                        </div>
                         <div class="input-group mb-3 w-100 d-flex justify-content-start">
-                            <select class="custom-select" name="amount" id="inputGroupSelect01" style="width: 92%;">
+                            <select class="custom-select card-amount" name="amount" id="inputGroupSelect01" style="width: 92%;">
                               <option value="100" selected>$100</option>
                               <option value="500">$500</option>
                               <option value="1000">$1000</option>
@@ -189,6 +193,7 @@ select.custom-select {
         </div> --}}
     </div>
     <script src="https://www.paypal.com/sdk/js?client-id={{env('PAYPAL_SANDBOX_CLIENT_ID')}}&disable-funding=paylater"></script>
+    
     <script>
         (function(){
             paypal.Buttons({
@@ -237,7 +242,7 @@ select.custom-select {
                                         if(res.status){
                                             toastr.success(res.msg);
                                         }else{
-                                            taostr.error(res.msg);
+                                            toastr.error(res.msg);
                                         }
                                     }
 
@@ -253,68 +258,14 @@ select.custom-select {
             }).render('#paypal-button-container');
         })()
     </script>
-<script>
-    // const monthInput = document.querySelector('#month');
-    // const yearInput = document.querySelector('#year');
-    // const cvvInput = document.getElementById('cvvInput');
-
-    // const focusSibling = function(target, direction, callback) {
-    // const nextTarget = target[direction];
-    // nextTarget && nextTarget.focus();
-    // callback && callback(nextTarget);
-    // }
-
-
-
-
-    // monthInput.addEventListener('input', (event) => {
-
-    //     const value = event.target.value.toString();
-    //     // adds 0 to month user input like 9 -> 09
-    //     if (value.length === 1 && value > 1) {
-    //         event.target.value = "0" + value;
-    //     }
-    //     // bounds
-    //     if (value === "00") {
-    //         event.target.value = "01";
-    //     } else if (value > 12) {
-    //         event.target.value = "12";
-    //     }
-    //     // if we have a filled input we jump to the year input
-    //     2 <= event.target.value.length && focusSibling(event.target, "nextElementSibling");
-    //     event.stopImmediatePropagation();
-    // });
-
-    // yearInput.addEventListener('keydown', (event) => {
-
-    //     if (event.key === "Backspace" && event.target.selectionStart === 0) {
-    //         focusSibling(event.target, "previousElementSibling");
-    //         event.stopImmediatePropagation();
-    //     }
-    // });
-
-    // const inputMatchesPattern = function(e) {
-    // const { 
-    //     value, 
-    //     selectionStart, 
-    //     selectionEnd, 
-    //     pattern 
-    // } = e.target;
-    
-    // const character = String.fromCharCode(e.which);
-    // const proposedEntry = value.slice(0, selectionStart) + character + value.slice(selectionEnd);
-    // const match = proposedEntry.match(pattern);
-    
-    // return e.metaKey || 
-    //     e.which <= 0 || 
-    //     e.which == 8 || 
-    //     match && match["0"] === match.input; 
-    // };
-
-    // document.querySelectorAll('input[data-pattern-validate]').forEach(el => el.addEventListener('keypress', e => {
-    //     if (!inputMatchesPattern(e)) {
-    //         return e.preventDefault();
-    //     }
-    // }));
+    <script>
+        $(document).on("change" , ".card-amount" , function(e){
+            let element = e.target;
+            let amount = element.value;
+            let sellingPercentage = "{{$percentage->percentage}}";
+            let currentAmount = (amount * sellingPercentage) / 100;
+            let getAmount = amount - currentAmount;
+            document.querySelector(".percentage_amount").innerText = "$"+getAmount.toFixed(2);
+        })
     </script>
     @endsection

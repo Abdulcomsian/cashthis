@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::post('create-paypal-transaction', [CardController::class, 'createPaypalTransaction'])->name('createPaypalTransaction');
     Route::any('success-transaction' , [CardController::class , 'successTransaction'])->name('successTransaction');
     Route::post('user-sold-card' , [CardController::class , 'getSoldCard'])->name('getSoldCard');
+    Route::post('update-percentage' , [CardController::class ,'updatePercentage'])->name('updatePercentage');
     //paypal route ends here
     Route::get('get-profile-detail' , [UserDashboardController::class ,'getProfileDetail'])->name('getProfileDetail');
 

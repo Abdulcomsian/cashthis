@@ -10,6 +10,7 @@ use Srmklive\PayPal\Services\PayPal;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\Type\TrueType;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\{ Percentage };
 
 class CardController extends Controller
 {
@@ -18,7 +19,8 @@ class CardController extends Controller
        $user =  User::with('bankDetails')->where('id' , auth()->user()->id)->first();
 
        if($user->bankDetails){
-           return view('sell-card');
+           $percentage = Percentage::orderBy('id' , 'desc')->first();
+           return view('sell-card')->with(["percentage" => $percentage]);
        }else{
            return view('bank-information');
        }
@@ -69,19 +71,21 @@ class CardController extends Controller
             $validator = Validator::make($request->all() , [
                 'id' => 'required',
                 'payerEmail' => 'required|email',
-                'payedAmount' => 'required|numeric'  
+                'payedAmount' => 'required|numeric',  
             ]);
 
             if($validator->fails()){
                 return response()->json(['status' => false , 'msg' => 'Something Went Wrong' , 'error' => $validator->getMessageBag() ]);
             }else{
 
+                $percentageId = Percentage::orderBy('id' , 'desc')->first()->id;
                 Card::create([
                     'user_id' => auth()->user()->id,
                     'transaction_id' => $request->id,
                     'status' => AppConst::PENDING,
                     'email' => $request->payerEmail,
-                    'amount' => $request->payedAmount
+                    'amount' => $request->payedAmount,
+                    'percentage_id' => $percentageId
                 ]);
 
                 return response()->json(['status' => true , 'msg' => 'Transaction Added Successfully' ]);
@@ -96,7 +100,7 @@ class CardController extends Controller
     }
 
     public function getSellingCards(Request $request){
-        $cards = Card::with('user')->orderBy('id' , 'desc')->get();
+        $cards = Card::with('user' , 'percentage')->orderBy('id' , 'desc')->get();
         
         return DataTables::of($cards)
                 ->addIndexColumn()
@@ -115,10 +119,17 @@ class CardController extends Controller
                 ->addColumn('amount' , function($card){
                     return "$".$card->amount;
                 })
-                ->addColumn('status' , function($card){
-                    return $card->status == AppConst::PENDING ? "PENDING" : "COMPLETED" ;
+                ->addColumn('payed_amount' , function($card){
+                    $payedAmount = $card->amount - (($card->percentage->percentage * $card->amount) / 100 );
+                    return "$".number_format($payedAmount , 2);
                 })
-                
+                ->addColumn('payed_percentage' , function($card){
+                    return number_format($card->percentage->percentage , 2) ;
+                })
+                ->addColumn('status' , function($card){
+                    $status =  $card->status == AppConst::PENDING ? "PENDING" : "COMPLETED" ;
+                    return "<strong>$status</strong>";
+                })
                 ->addColumn('action' , function($card){
                     return '<div class="d-flex text-center"><i class="fas fa-info-circle bank-detail-btn mx-3" title="view bank detail" data-user-id="'.$card->user->id.'"></i><i class="fas fa-pen-square card-status-btn" data-card-id="'.$card->id.'"></i></div>';
                 })
@@ -127,7 +138,8 @@ class CardController extends Controller
     }
 
     public function cardList(){
-        return view('card-list');
+        $latestPercentage = Percentage::orderBy('id' , 'desc')->first()->percentage;
+        return view('card-list')->with(['latestPercentage' => $latestPercentage ]);
     }
 
     public function getCardStatus(Request $request){
@@ -168,7 +180,7 @@ class CardController extends Controller
 
     public function getSoldCard(){
         try{
-            $cards = Card::where('id' , auth()->user()->id)->orderBy('id','desc')->get();
+            $cards = Card::with('percentage')->where('id' , auth()->user()->id)->orderBy('id','desc')->get();
             return DataTables::of($cards)
                             ->addIndexColumn()
                             ->addColumn( 'transaction_id' , function($card){
@@ -180,11 +192,45 @@ class CardController extends Controller
                             ->addColumn('amount', function($card){
                                 return "$".$card->amount;
                             })
-                            ->addColumn('status', function($card){
-                                return $card->status == AppConst::PENDING ? 'PENDING' : 'COMPLETED' ;
+                            ->addColumn('recieve_amount', function($card){
+                                $recieveAmount =$card->amount - (($card->percentage->percentage * $card->amount) / 100);
+                                return "$".number_format($recieveAmount , 2);
                             })
-                            ->rawColumns(['transaction_id' , 'email' , 'amount' , 'status'])
+                            ->addColumn('status', function($card){
+                                 $status = $card->status == AppConst::PENDING ? 'PENDING' : 'COMPLETED' ;
+                                 return "<strong>$status<strong>";
+                            })
+                            ->rawColumns(['transaction_id' , 'email' , 'amount' , 'recieve_amount' , 'status'])
                             ->make(true);
+
+        }catch(\Exception $e){
+            return response()->json(['status' => false , 'msg' => "Something Went Wrong" , "error" => $e->getMessage()]);
+        }
+    }
+
+    public function updatePercentage(Request $request){
+        $validator = Validator::make($request->all() , [
+            'percentage' => 'required|numeric',
+        ]);
+
+        
+        if($validator->fails()){
+            return response()->json(['status' => false , 'msg' => "Something Went Wrong" , "error" => $validator->getMessageBag()]);
+        }
+
+        $pattern = '/^\d{1,2}(\.\d{0,2})?$/';
+
+        if(!preg_match($pattern , $request->percentage)){
+            return response()->json(['status' => false , 'msg' => "Percentage must be numeric maximum 2 digit and 2 decimal points"]);
+        }
+
+        try{
+        
+            Percentage::create([
+                'percentage' => number_format($request->percentage , 2)
+            ]);
+
+            return response()->json(["status" => true , "msg" => "Percenatage Updated Successfully"]);
 
         }catch(\Exception $e){
             return response()->json(['status' => false , 'msg' => "Something Went Wrong" , "error" => $e->getMessage()]);

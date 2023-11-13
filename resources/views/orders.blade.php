@@ -49,6 +49,7 @@
                 <th scope="col">Transaction Id</th>
                 <th scope="col">Transaction Email</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Recieve Amount</th>
                 <th scope="col">Payment Status</th>
               </tr>
             </thead>
@@ -93,6 +94,7 @@
                             { data: 'transaction_id', name: 'transaction_id' },
                             { data: 'email', name: 'email' },
                             { data: 'amount', name: 'amount' },
+                            { data: 'recieve_amount', name: 'recieve_amount' },
                             { data: 'status', name: 'status' },
                        ];
             loadTable(".card-table" , url , columns);
