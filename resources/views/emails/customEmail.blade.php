@@ -47,7 +47,7 @@
 <body>
     <div class="container">
         <img src="{{ asset('assets/images/Frame127.png') }}" alt="Logo">
-        <p>{{ $line }}</p>
+        <p>Message: {{ $line }}</p>
     </div>
     <footer>
         <p style="text-align: center;">All Rights Reserved. GiftHub</p>

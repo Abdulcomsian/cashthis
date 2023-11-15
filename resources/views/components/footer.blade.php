@@ -4,11 +4,11 @@
             <div class="col-md-5">
                 <img src="{{ asset('assets/images/Frame127.png') }}" alt="">
                 <div class="text-4 mt-5">Sign up for our sales and savings emails</div>
-                @if(session()->has('success'))
-                    {{ session()->get('success') }}
+                @if(session()->has('success_subscribe'))
+                    <span class="text-success">{{ session()->get('success_subscribe') }}</span>
                 @endif
-                @if(session()->has('error'))
-                    {{ session()->get('error') }}
+                @if(session()->has('error_subscribe'))
+                    <span class="text-danger">{{ session()->get('error_subscribe') }}</span>
                 @endif
                 <form action="{{ route('subscribe.user') }}" method="post">
                     @csrf

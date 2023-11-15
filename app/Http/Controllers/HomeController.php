@@ -53,7 +53,7 @@ class HomeController extends Controller
         $subject = $request->input('subject');
         $message = $request->input('message');
         try{
-            Notification::route('mail', 'm.muneebulrahman@gmail.com')->notify(new contactUsNotification($subject, $message, $email));
+            Notification::route('mail', 'support@gifthub.app')->notify(new contactUsNotification($subject, $message, $email));
             return redirect()->back()->with('success', 'Your message has Sent!');
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=> 'Sorry! Your message message is not delivered. Please try again later', 'error_msg'=> $e->getMessage()] );
@@ -71,13 +71,13 @@ class HomeController extends Controller
         $email = $request->input('email');
         try{
             if(Newsletter::isSubscribed($email)){
-                return redirect()->back()->with('error', 'You have already Subscribed');
+                return redirect()->back()->with('error_subscribe', 'You have already Subscribed');
             }else{
                 Newsletter::subscribe($email);
-                return redirect()->back()->with('success', 'You have successfully subscribed');
+                return redirect()->back()->with('success_subscribe', 'You have successfully subscribed');
             }
         }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error_subscribe', $e->getMessage());
         }
     }
 

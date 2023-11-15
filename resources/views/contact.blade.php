@@ -20,13 +20,13 @@ Condition Of Use
         </div>
         @endif
 
-        @if(session()->has('error_msg'))
+        @if(session()->has('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ session()->get('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        <form method="post" action="{{route('contactform')}}">
+        <form method="post" action="{{route('contactform')}}" class="form-class">
             {{ csrf_field() }}
             <div class="row mb-3 justify-content-between">
                 <div class="col-md-6">
