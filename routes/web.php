@@ -61,10 +61,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update-percentage' , [CardController::class ,'updatePercentage'])->name('updatePercentage');
     //paypal route ends here
     Route::get('get-profile-detail' , [UserDashboardController::class ,'getProfileDetail'])->name('getProfileDetail');
+    
+    
 
 });
-
-
+// mailchimp subscribe route
+Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe.user');
 Route::group(['middleware' => ['auth' , 'check.admin']] , function(){
     Route::get('card-list' , [CardController::class , 'cardList'])->name('cardList');
     Route::post('selling-card-list' , [CardController::class , 'getSellingCards'])->name('sellingCards');
