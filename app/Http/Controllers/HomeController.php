@@ -29,7 +29,9 @@ class HomeController extends Controller
     {
         return view('contact');
     }
-
+public function contactform(Request $request){
+    dd("dd", $request->all());
+}
     public function policy()
     {
         return view('privacy-policy');
