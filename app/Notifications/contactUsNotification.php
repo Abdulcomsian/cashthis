@@ -52,7 +52,7 @@ class contactUsNotification extends Notification
         // dd($this->message);
         return (new MailMessage)
                     ->subject($this->subject)
-                    ->from('support@gifthub.com')
+                    ->from(env('MAIL_FROM_ADDRESS'))
                     ->view('emails.customEmail', [
                         'first_name' => $this->first_name,
                         'last_name' => $this->last_name,
