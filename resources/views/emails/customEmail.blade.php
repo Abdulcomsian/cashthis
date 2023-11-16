@@ -47,6 +47,7 @@
 <body>
     <div class="container">
         <img src="{{ asset('assets/images/Frame127.png') }}" alt="Logo">
+        <p>Email: {{ $email }} </p>
         <p>Message: {{ $line }}</p>
     </div>
     <footer>

@@ -50,9 +50,10 @@ class contactUsNotification extends Notification
         // dd($this->message);
         return (new MailMessage)
                     ->subject($this->subject)
-                    ->from($this->email)
+                    ->from('support@gifthub.com')
                     ->view('emails.customEmail', [
-                        'line' => $this->message,
+                        'line' => $this->message, 
+                        'email' => $this->email,
                     ]);
     }
 

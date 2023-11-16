@@ -53,7 +53,7 @@ class HomeController extends Controller
         $subject = $request->input('subject');
         $message = $request->input('message');
         try{
-            Notification::route('mail', 'support@gifthub.app')->notify(new contactUsNotification($subject, $message, $email));
+            Notification::route('mail', env('MAIL_FROM_ADDRESS'))->notify(new contactUsNotification($subject, $message, $email));
             return redirect()->back()->with('success', 'Your message has Sent!');
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=> 'Sorry! Your message message is not delivered. Please try again later', 'error_msg'=> $e->getMessage()] );
