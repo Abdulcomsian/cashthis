@@ -20,9 +20,9 @@ Condition Of Use
         </div>
         @endif
 
-        @if(session()->has('error_msg'))
+        @if(session()->has('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session()->get('error_msg') }}
+            {{ session()->get('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
