@@ -52,8 +52,10 @@ class HomeController extends Controller
         $email = $request->input('email');
         $subject = $request->input('subject');
         $message = $request->input('message');
+        $first_name = $request->input('first_name');
+        $last_name = $request->input('last_name');
         try{
-            Notification::route('mail', env('MAIL_FROM_ADDRESS'))->notify(new contactUsNotification($subject, $message, $email));
+            Notification::route('mail', env('MAIL_FROM_ADDRESS'))->notify(new contactUsNotification($subject, $message, $email, $first_name, $last_name));
             return redirect()->back()->with('success', 'Your message has Sent!');
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=> 'Sorry! Your message message is not delivered. Please try again later', 'error_msg'=> $e->getMessage()] );

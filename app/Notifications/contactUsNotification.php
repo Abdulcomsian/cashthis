@@ -21,11 +21,13 @@ class contactUsNotification extends Notification
 
     public $subject;
     public $message;
-    public function __construct($subject, $message, $email)
+    public function __construct($subject, $message, $email, $first_name, $last_name)
     {
         $this->subject = $subject;
         $this->message = $message;
         $this->email = $email;
+        $this->first_name = $first_name;
+        $this->last_name = $last_name;
     }
 
     /**
@@ -52,8 +54,10 @@ class contactUsNotification extends Notification
                     ->subject($this->subject)
                     ->from('support@gifthub.com')
                     ->view('emails.customEmail', [
-                        'line' => $this->message, 
+                        'first_name' => $this->first_name,
+                        'last_name' => $this->last_name,
                         'email' => $this->email,
+                        'line' => $this->message, 
                     ]);
     }
 
