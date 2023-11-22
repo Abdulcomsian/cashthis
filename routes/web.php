@@ -28,11 +28,12 @@ Route::group(['middleware' => ['check.passcode']], function () {
     Route::get('home', [HomeController::class, 'home'])->name('home');
     Route::get('gurantee', [HomeController::class, 'gurantee'])->name('gurantee');
     Route::get('condition-of-use', [HomeController::class, 'condition'])->name('useCondition');
-    Route::get('contact', [HomeController::class, 'contact'])->name('contact');
+   
     Route::get('privacy-policy', [HomeController::class, 'policy'])->name('policy');
     
 });
-
+ Route::get('contact', [HomeController::class, 'contact'])->name('contact');
+ Route::post('contactform', [HomeController::class, 'contactform'])->name('contactform');
 Route::get('forget-password', [HomeController::class, 'forgetPassword'])->name('forgetPassword');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/user-card', [GiftcardController::class, 'giftCardPage'])->name('giftCardPage');
@@ -60,10 +61,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update-percentage' , [CardController::class ,'updatePercentage'])->name('updatePercentage');
     //paypal route ends here
     Route::get('get-profile-detail' , [UserDashboardController::class ,'getProfileDetail'])->name('getProfileDetail');
+    
+    
 
 });
-
-
+// mailchimp subscribe route
+Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe.user');
 Route::group(['middleware' => ['auth' , 'check.admin']] , function(){
     Route::get('card-list' , [CardController::class , 'cardList'])->name('cardList');
     Route::post('selling-card-list' , [CardController::class , 'getSellingCards'])->name('sellingCards');
