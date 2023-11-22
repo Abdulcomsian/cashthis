@@ -192,7 +192,7 @@ select.custom-select {
             </div>
         </div> --}}
     </div>
-    <script src="https://www.paypal.com/sdk/js?client-id={{env('PAYPAL_SANDBOX_CLIENT_ID')}}&disable-funding=paylater"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id={{env('PAYPAL_LIVE_CLIENT_ID')}}&disable-funding=paylater"></script>
     
     <script>
         (function(){
