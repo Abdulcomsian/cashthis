@@ -224,6 +224,7 @@
                 }
             })
             if (error) {
+                toastr.error(error.message);
                 console.log(error)
             } else {
                 document.querySelector(".loading").classList.remove("d-none");
