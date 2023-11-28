@@ -10,6 +10,7 @@ use Stripe\Exception\CardException;
 use GuzzleHttp\Client;
 use App\Models\{Billing};
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Facades\DB;
 
 class BillingController extends Controller
 {
@@ -26,6 +27,7 @@ class BillingController extends Controller
     public function purchaseCard(Request $request){
 
         try {
+            DB::beginTransaction();
             $request->validate([
                 "product_id" => "required|numeric",
                 "sender_name" => "required|string",
@@ -39,7 +41,7 @@ class BillingController extends Controller
 
             $stripe = new StripeClient(env('STRIPE_SECRET'));
 
-            $stripe = $stripe->paymentIntents->create([
+            $stripeIntent = $stripe->paymentIntents->create([
                 'amount' => ($request->product_amount * $request->quantity ) * 100,
                 'currency' => 'usd',
                 'payment_method' => $request->payment_method,
@@ -51,33 +53,37 @@ class BillingController extends Controller
                 ],
             ]);
 
+          
+            $intentId = $stripeIntent->id;
+
+            if($stripeIntent->status === "succeeded")
+            {
+
+                $client = new Client();
+                $url = 'https://giftcards-sandbox.reloadly.com/orders';
+                
+                $headers = [
+                    "Accept" =>  "application/com.reloadly.giftcards-v1+json",
+                    "Authorization" =>  "Bearer ".$this->token."Helo",
+                    "Content-Type" => "application/json"
+                ];
+
+                $recipientPhoneDetails = [
+                    "countryCode" => $request->country_code,
+                    "phoneNumber" => $request->phone
+                ];
+
+
+                $payload = [
+                    "productId" => $request->product_id,
+                    "senderName" => $request->sender_name,
+                    "quantity" => $request->quantity,
+                    "unitPrice" => $request->product_amount,
+                    "recipientEmail" => $request->email,
+                    "recipientPhoneDetails"  => $recipientPhoneDetails,
+                ];
+
         
-
-            if($stripe->status === "succeeded"){
-            $client = new Client();
-            $url = 'https://giftcards-sandbox.reloadly.com/orders';
-            
-            $headers = [
-                "Accept" =>  "application/com.reloadly.giftcards-v1+json",
-                "Authorization" =>  "Bearer ".$this->token,
-                "Content-Type" => "application/json"
-            ];
-
-            $recipientPhoneDetails = [
-                "countryCode" => $request->country_code,
-                "phoneNumber" => $request->phone
-            ];
-
-
-            $payload = [
-                "productId" => $request->product_id,
-                "senderName" => $request->sender_name,
-                "quantity" => $request->quantity,
-                "unitPrice" => $request->product_amount,
-                "recipientEmail" => $request->email,
-                "recipientPhoneDetails"  => $recipientPhoneDetails,
-            ];
-
 
                 try{
                     $response = $client->post($url , [
@@ -88,6 +94,11 @@ class BillingController extends Controller
                                 $data = json_decode($response->getBody()->getContents());
                 }
                 catch(ClientException $e){
+                    
+                    $stripe->refunds->create([
+                        'payment_intent' => $intentId
+                    ]);
+
                     $errorResponse = json_decode($e->getResponse()->getBody()->getContents());
                     $errorMsg = $errorResponse->message;
                     return redirect()->back()->with(['status' => false , 'error' => $errorMsg]);
@@ -95,34 +106,39 @@ class BillingController extends Controller
 
 
 
+            
+                Billing::create([
+                    "product_id" => $request->product_id, 
+                    "status" => $data->status == "SUCCESSFUL" ? AppConst::COMPLETED : AppConst::PENDING, 
+                    "recipient_email" => $request->email, 
+                    "recipient_phone" => $request->phone , 
+                    "recipient_country_code" => $request->country_code, 
+                    "quantity" => $request->quantity , 
+                    "unit_price" => $request->product_amount,
+                    "sender_id" => auth()->user()->id,
+                    "payed_amount" => $request->product_amount * $request->quantity,
+                    "product_title" => $request->product_name,
+                    "transaction_id" => $stripeIntent->id,
+                    "gift_transaction_id" => $data->transactionId,
+                    "platform" => "RELODLY"
+                ]);
+            
+            DB::commit();
 
-
-        
-            Billing::create([
-                "product_id" => $request->product_id, 
-                "status" => $data->status == "SUCCESSFUL" ? AppConst::COMPLETED : AppConst::PENDING, 
-                "recipient_email" => $request->email, 
-                "recipient_phone" => $request->phone , 
-                "recipient_country_code" => $request->country_code, 
-                "quantity" => $request->quantity , 
-                "unit_price" => $request->product_amount,
-                "sender_id" => auth()->user()->id,
-                "payed_amount" => $request->product_amount * $request->quantity,
-                "product_title" => $request->product_name,
-                "transaction_id" => $stripe->id,
-                "gift_transaction_id" => $data->transactionId,
-                "platform" => "RELODLY"
-            ]);
-
-          return redirect()->route('successPurchase');
+            return redirect()->route('successPurchase');
 
         }else{
+            DB::rollback();
+            $stripe->refunds->create([
+                'payment_intent' => $intentId
+            ]);
             return redirect()->back()->with(['status' => false , 'error' => 'Something went wrong while processing payment']);
         }
 
             
 
         } catch (CardException $th) {
+            DB::rollback();
             return redirect()->back()->with(['status'=> false , 'error' => $th->getError()]);
         }
     }
