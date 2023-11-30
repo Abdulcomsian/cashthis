@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('user-dashboard', [UserDashboardController::class, 'getDashboard'])->name('userDashboard');
     Route::get('gift-card-detail/{productId}', [GiftCardController::class, 'giftCardDetail'])->name('giftCardDetail');
     Route::post('purchase-card', [BillingController::class, 'purchaseCard'])->name('purchaseGiftCard');
+    Route::post('buy-card', [BillingController::class, 'buyCard'])->name('buyGiftCard');
     Route::get('success-purchase', [BillingController::class, 'getSuccessPurchase'])->name('successPurchase');
     Route::get('orders', [GiftcardController::class, 'getOrdersPage'])->name('orders');
     Route::post('orders-list', [GiftcardController::class, 'getOrdersList'])->name('ordersList');
