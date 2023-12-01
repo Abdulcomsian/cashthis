@@ -160,10 +160,11 @@ select.custom-select {
                 },
 
                 onApprove: function(data, actions) {
-
+                    
                 // This function captures the funds from the transaction.
                         return actions.order.capture().then(function(details) {
                             console.log(details);
+                            let amount = details.purchase_units[0].amount.value;
                             if(details.status == 'COMPLETED'){
                                 $.ajax({
                                     type : "post",
@@ -172,7 +173,7 @@ select.custom-select {
                                         _token : "{{csrf_token()}}",
                                         id : details.id,
                                         payerEmail: details.payer.email_address,
-                                        payedAmount: document.getElementsByName("amount")[0].value,
+                                        payedAmount: amount,
                                     },
                                     success: function(res){
                                         if(res.status){
