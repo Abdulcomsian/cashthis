@@ -84,6 +84,9 @@
             background-color: #5570F1;
             color: #ffffff
         }
+        #shipToBillingAddress{
+            display: none!important;
+        }
     </style>
 @endsection
 
@@ -280,6 +283,9 @@
                             value: document.getElementsByName("product_amount")[0].value,
                         }
                         }],
+                         application_context: {
+                            shipping_preference: 'NO_SHIPPING'
+                        }
                     });
                 },
 
