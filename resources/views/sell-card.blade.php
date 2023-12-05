@@ -156,9 +156,9 @@ select.custom-select {
                             value: document.getElementsByName("amount")[0].value,
                         }
                         }],
-                        application_context: {
-                            shipping_preference: 'NO_SHIPPING'
-                        }
+                        //     shipping_preference: 'NO_SHIPPING'
+                        // application_context: {
+                        // }
                     });
                 },
 

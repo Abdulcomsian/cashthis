@@ -16,7 +16,7 @@ use App\Http\Controllers\{BankInformationController, GiftcardController, HomeCon
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'commingSoon']);
+// Route::get('/', [HomeController::class, 'commingSoon']);
 Route::get('comming-soon', [HomeController::class, 'commingSoon'])->name('commingSoon');
 Route::post('set-passcode', [PasscodeController::class, 'setPasscode'])->name('set.passcode');
 Route::get('login', [HomeController::class, 'login'])->name('login');
@@ -24,14 +24,20 @@ Route::get('signup', [HomeController::class, 'register'])->name('register');
 Route::get('forget-password', [HomeController::class , 'forgetPassword'])->name('forgetPassword');
 Route::get('aboutUs', [HomeController::class , 'aboutUs'])->name('aboutUs');
 
-Route::group(['middleware' => ['check.passcode']], function () {
-    Route::get('home', [HomeController::class, 'home'])->name('home');
-    Route::get('gurantee', [HomeController::class, 'gurantee'])->name('gurantee');
-    Route::get('condition-of-use', [HomeController::class, 'condition'])->name('useCondition');
+Route::get('/', [HomeController::class, 'index']);
+Route::get('home', [HomeController::class, 'index'])->name('home');
+Route::get('gurantee', [HomeController::class, 'gurantee'])->name('gurantee');
+Route::get('condition-of-use', [HomeController::class, 'condition'])->name('useCondition');
+Route::get('privacy-policy', [HomeController::class, 'policy'])->name('policy');
+
+// Route::group(['middleware' => ['check.passcode']], function () {
+//     Route::get('home', [HomeController::class, 'home'])->name('home');
+//     Route::get('gurantee', [HomeController::class, 'gurantee'])->name('gurantee');
+//     Route::get('condition-of-use', [HomeController::class, 'condition'])->name('useCondition');
    
-    Route::get('privacy-policy', [HomeController::class, 'policy'])->name('policy');
+//     Route::get('privacy-policy', [HomeController::class, 'policy'])->name('policy');
     
-});
+// });
  Route::get('contact', [HomeController::class, 'contact'])->name('contact');
  Route::post('contactform', [HomeController::class, 'contactform'])->name('contactform');
 Route::get('forget-password', [HomeController::class, 'forgetPassword'])->name('forgetPassword');
@@ -70,6 +76,9 @@ Route::group(['middleware' => ['auth']], function () {
 Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe.user');
 Route::group(['middleware' => ['auth' , 'check.admin']] , function(){
     Route::get('card-list' , [CardController::class , 'cardList'])->name('cardList');
+    Route::get('user-list' , [HomeController::class , 'userList'])->name('userList');
+    Route::post('users' , [HomeController::class , 'getUsers'])->name('users');
+    Route::post('delete-user' , [HomeController::class , 'deleteUser'])->name('deleteUser');
     Route::post('selling-card-list' , [CardController::class , 'getSellingCards'])->name('sellingCards');
     Route::post('get-user-bank-details' , [BankInformationController::class , 'getBankDetails'])->name('bankDetails');
     Route::post('get-card-status' , [CardController::class ,'getCardStatus'])->name('getCardStatus');

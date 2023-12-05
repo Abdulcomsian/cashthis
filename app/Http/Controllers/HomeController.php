@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\AppConst;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\{ Notification , Validator};
 use App\Notifications\contactUsNotification;
 // use Spatie\Newsletter\Facades\Newsletter;
 use Newsletter;
+use Yajra\DataTables\DataTables;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -14,6 +17,7 @@ class HomeController extends Controller
     {
         return view('index');
     }
+    
     public function aboutUs()
     {
         return view('about');
@@ -108,7 +112,55 @@ class HomeController extends Controller
         return view('comming-soon');
     }
 
+    public function userList(){
+       
+        return view('user-list');
+    }
+
+    public function getUsers(){
+        $users = User::with('orders' , 'sellCards')->where('type' , AppConst::USER)->get();
+        return DataTables::of($users)
+                        ->addIndexColumn()
+                        ->addColumn( 'username' , function($user){
+                            return $user->first_name.' '.$user->last_name;
+                        })
+                        ->addColumn('email', function($user){
+                            return $user->email;
+                        })
+                        ->addColumn('phone', function($user){
+                            return $user->phone;
+                        })
+                        ->addColumn('order', function($user){
+                            return '<div class="d-flex justify-content-center">'.$user->orders->count().'</div>';
+                        })
+                        ->addColumn('sold_card', function($user){
+                                return '<div class="d-flex justify-content-center">'.$user->sellCards->count().'</div>';
+                        })
+                        ->addColumn('action', function($user){
+                            return '<div class="d-flex justify-content-center">
+                                        <i class="delete-user fas fa-trash-alt text-danger mx-2" title="Delete User" data-user-id="'.$user->id.'"></i>
+                                        <i class="user-bank-detail fas fa-university text-muted mx-2" title="Bank Detail" data-user-id="'.$user->id.'"></i>
+                                    <div>';
+                        })
+                        ->rawColumns(['username' , 'email' , 'phone' , 'order' , 'sold_card' , 'action'])
+                        ->make(true);
+
+    }
 
 
-    
+    public function deleteUser(Request $request){
+        $validator = Validator::make( $request->all() , [
+            'userId' => 'required|numeric',
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['status' => false , 'msg' => 'Something Went Wrong' , 'error' => $validator->getMessageBag()  ]);
+        }
+
+        $id = $request->userId;
+        User::where('id' , $id)->delete();
+        return response()->json(['status' => true , 'msg' => 'User Deleted Successfully' ]);
+    }
+
+
 }

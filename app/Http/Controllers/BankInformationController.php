@@ -62,10 +62,15 @@ class BankInformationController extends Controller
                 return response()->json(['status' => false , 'msg' => 'Something Went Wrong' , 'error' => $validator->getMessageBag()  ]);
             }
 
-
+            
+            
             $detail = BankInformation::where('user_id' , $request->id)->first();
-            $html = view('ajax.bank-detail',['detail' => $detail])->render();
-            return response()->json(['status' => true , 'html' => $html]);
+            if(!isset($detail)){
+                return response()->json(['status' => false , 'msg' => 'Bank Information Not Found' ]);
+            }else{
+                $html = view('ajax.bank-detail',['detail' => $detail])->render();
+                return response()->json(['status' => true , 'html' => $html]);
+            }
 
         }catch(\Exception $e){
             return response()->json(['status' => false , 'msg' => 'Something Went Wrong' , 'error' => $e->getMessage()  ]);

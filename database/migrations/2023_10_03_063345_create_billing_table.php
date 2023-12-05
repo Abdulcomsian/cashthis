@@ -29,7 +29,7 @@ class CreateBillingTable extends Migration
             $table->string("transaction_id");
             $table->string("gift_transaction_id");
             $table->timestamps();
-            $table->foreign("sender_id")->references("id")->on("users");
+            $table->foreign("sender_id")->references("id")->on("users")->onDelete('cascade');
         });
     }
 

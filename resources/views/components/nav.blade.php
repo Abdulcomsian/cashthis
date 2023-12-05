@@ -71,8 +71,9 @@
                                 @if(auth()->check())
                                     <a class="dropdown-item" href="{{ route('orders') }}" role="button">Orders</a>
                                 @endif
-                                @if(auth()->check() && auth()->user()->type == AppConst::ADMIN)
+                                @if(auth()->check() && auth()->user()->type == \AppConst::ADMIN)
                                     <a class="dropdown-item" href="{{ route('cardList') }}" role="button">Card List</a>
+                                    <a class="dropdown-item" href="{{ route('userList') }}" role="button">Users</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('getProfileDetail') }}" role="button">Profile Detail</a>
                                 <button class="dropdown-item logout-btn">Logout</button>
